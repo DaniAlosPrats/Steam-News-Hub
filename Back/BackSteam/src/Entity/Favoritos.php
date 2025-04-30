@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\FavoritosRepository;
+use App\Entity\Usuario;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
 #[ORM\Entity(repositoryClass: FavoritosRepository::class)]
@@ -21,7 +22,7 @@ class Favoritos
     private ?bool $likes = null;
 
     #[ORM\ManyToOne(inversedBy: 'favoritos')]
-    private ?usuario $users = null;
+    private ?Usuario $users = null;
 
     #[ORM\Column]
     private ?bool $favoritos = null;
@@ -62,12 +63,12 @@ class Favoritos
         return $this;
     }
 
-    public function getUsers(): ?usuario
+    public function getUsers(): ?Usuario
     {
         return $this->users;
     }
 
-    public function setUsers(?usuario $users): static
+    public function setUsers(?Usuario $users): static
     {
         $this->users = $users;
 
