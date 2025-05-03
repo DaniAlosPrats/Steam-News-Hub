@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Steam } from '../models/response.interface'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class JuegosService {
+  constructor(private http: HttpClient) {}
 
-  constructor(public http: HttpClient) { }
-  public getResponse(): Observable<any> {
-    return this.http.get<any>('https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=420&count=3&maxlength=300&format=json');
-    }
-    
+  public getResponse(): Observable<Steam> {
+    return this.http.get<Steam>(
+      '/api/ISteamNews/GetNewsForApp/v0002/?appid=420&count=3&maxlength=300&format=json'
+    );
+  }
 }

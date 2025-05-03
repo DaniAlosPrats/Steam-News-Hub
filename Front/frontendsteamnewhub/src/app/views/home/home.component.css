@@ -1,0 +1,25 @@
+.jumbotron {
+    background-color: #000;
+    color: #fff;
+    padding: 6rem 2rem;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+  }
+  
+  .jumbotron h1 {
+    font-size: 4rem;
+    margin-bottom: 3rem;
+  }
+  
+  .carousel-inner img {
+    max-height: 500px;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 12px;
+  }
+  
+  .carousel {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
