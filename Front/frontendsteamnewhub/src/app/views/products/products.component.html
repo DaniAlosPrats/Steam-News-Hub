@@ -1,3 +1,53 @@
-<h1 class="Productos">Productos</h1>
+<body>
+<div id="Productos">
+    <h1>Productos</h1>
 
-<h2>Busqueda</h2>
+
+    <h2>Buscar Juegos</h2>
+    <div class="search-container">
+      <input type="text" placeholder="Buscar..." class="search-input" />
+      <button class="search-button">Buscar</button>
+    </div>
+    <h2>Juegos Más Buscados</h2>
+  
+    <div class="card-container">
+      <app-card-products
+        [title]="title1"
+        [description]="description1"
+        [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1696485600)'">
+      </app-card-products>
+  
+      <app-card-products
+        [title]="title2"
+        [description]="description2"
+        [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1696485600)'">
+      </app-card-products>
+  
+      <app-card-products
+        [title]="title3"
+        [description]="description3"
+        [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1696485600)'">
+      </app-card-products>
+      
+    </div>
+    <div class="card-container">
+      <app-card-products
+        [title]="title4"
+        [description]="description4"
+        [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1696485600)'">
+      </app-card-products>
+  
+      <app-card-products
+        [title]="title5"
+        [description]="description5"
+        [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1696485600)'">
+      </app-card-products>
+  
+      <app-card-products
+        [title]="title6"
+        [description]="description6"
+        [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1696485600)'">
+      </app-card-products>
+  </div>
+  </div>
+</body>
