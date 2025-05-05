@@ -1,53 +1,94 @@
 <body>
 <div id="Productos">
-    <h1>Productos</h1>
+  <h1>Productos</h1>
 
+<h2>Buscar noticias por AppID</h2>
 
-    <h2>Buscar Juegos</h2>
-    <div class="search-container">
-      <input type="text" placeholder="Buscar..." class="search-input" />
-      <button class="search-button">Buscar</button>
+<form (ngSubmit)="buscarJuego()">
+  <input
+    type="text"
+    [(ngModel)]="appidInput"
+    name="nombreJuego"
+    placeholder="Introduce el nombre del juego"
+    required />
+  <button type="submit">Buscar</button>
+</form>
+
+@if (hasSearched === true) {
+  <div class="card-container " >
+    <div class="row g-3">
+    @for (product of filteredProducts; track product.title){
+      <div class="col-md-3 mb-3"> 
+    <app-card-products 
+      [title]="product.title"
+      [description]="product.contents"
+      [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/' + appidInput + '/header.jpg)'">
+    </app-card-products>
     </div>
-    <h2>Juegos Más Buscados</h2>
-  
-    <div class="card-container">
-      <app-card-products
-        [title]="title1"
-        [description]="description1"
-        [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1696485600)'">
-      </app-card-products>
-  
-      <app-card-products
-        [title]="title2"
-        [description]="description2"
-        [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1696485600)'">
-      </app-card-products>
-  
-      <app-card-products
-        [title]="title3"
-        [description]="description3"
-        [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1696485600)'">
-      </app-card-products>
-      
-    </div>
-    <div class="card-container">
-      <app-card-products
-        [title]="title4"
-        [description]="description4"
-        [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1696485600)'">
-      </app-card-products>
-  
-      <app-card-products
-        [title]="title5"
-        [description]="description5"
-        [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1696485600)'">
-      </app-card-products>
-  
-      <app-card-products
-        [title]="title6"
-        [description]="description6"
-        [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1696485600)'">
-      </app-card-products>
+    }
   </div>
   </div>
+
+}
+
+
+
+@if(hasSearched === false){
+  <h2>Juegos Más Buscados</h2>
+
+  <div class="card-container">
+    <div class="row 3">
+      <div class="col-md-3 mb-3"> 
+    <app-card-products
+      [title]="title1"
+      [description]="description1"
+      [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'">
+    </app-card-products>
+    </div>
+    <div class="col-md-3 mb-4">
+    <app-card-products
+      [title]="title2"
+      [description]="description2"
+      [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'">
+    </app-card-products>
+    </div>
+    <div class="col-md-3 mb-3">
+    <app-card-products
+      [title]="title3"
+      [description]="description3"
+      [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'">
+    </app-card-products>
+    </div>
+  </div>
+  </div>
+  <div class="card-container">
+    <div class="row 3">
+    <div class="col-md-3 mb-3">
+    <app-card-products
+      [title]="title4"
+      [description]="description4"
+      [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'">
+    </app-card-products>
+    </div>
+    <div class="col-md-3 mb-3">
+    <app-card-products
+      [title]="title5"
+      [description]="description5"
+      [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'">
+    </app-card-products>
+    </div>
+    <div class="col-md-3 mb-3">
+    <app-card-products
+      [title]="title6"
+      [description]="description6"
+      [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'">
+    </app-card-products>
+    </div>
+  </div>
+</div>
+
+}
+</div>
+
+ 
 </body>

@@ -1,61 +1,44 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom border-black">
-    <div class="container align-items-end">
-      <a class="navbar-brand" routerLink="/home">
-        <img
-          src="logos/logo.png"
-          alt="Logo de Steam News Hub"
-          width="18px"
-        />
-        <span class="ms-2 fw-bold">Steam News Hub</span>
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <ul class="navbar-nav gap-lg-3 align-items-end fs-5">
-          <li class="nav-item">
-            <button
-              routerLink="/home"
-              routerLinkActive="active"
-              class="nav-link"
-              aria-current="page"
-              >Inicio</button
-            >
-          </li>
-          <li class="nav-item">
-            <button
-              routerLink="/juegos"
-              routerLinkActive="active"
-              class="nav-link"
-              >Juegos</button
-            >
-          </li>
-          <li class="nav-item">
-            <button
-              routerLink="/contact"
-              routerLinkActive="active"
-              class="nav-link"
-              >contacto</button
-            >
-          </li>
-          <li class="nav-item">
-            <button
-              routerLink="/login"
-              routerLinkActive="active"
-              class="nav-link"
-              >Login</button
-            >
-          </li>
-        </ul>
-      </div>
+  <div class="container-fluid">
+    
+    <a class="navbar-brand ms-3" routerLink="/home">
+      <img src="logos/logo.png" alt="Logo de Steam News Hub" width="40px" />
+    </a>
+
+    
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+     
+      <ul class="navbar-nav mx-auto gap-lg-3 fs-5">
+        <li class="nav-item">
+          <a routerLink="/home" routerLinkActive="active" class="nav-link">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/juegos" routerLinkActive="active" class="nav-link">Juegos</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/contact" routerLinkActive="active" class="nav-link">Contacto</a>
+        </li>
+      </ul>
+
+     
+      <ul class="navbar-nav me-3 fs-5">
+        <li class="nav-item">
+          <a routerLink="/login" routerLinkActive="active" class="nav-link">Login</a>
+        </li>
+      </ul>
     </div>
-  </nav>
-  
+  </div>
+</nav>

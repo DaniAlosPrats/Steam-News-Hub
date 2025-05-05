@@ -2,19 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { JuegosService } from '../../services/juegos.service';
 import { CardProductsComponent } from '../../components/card-products/card-products.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CardProductsComponent, CommonModule, FormsModule], // Added FormsModule for ngModel
+  imports: [CardProductsComponent, CommonModule, FormsModule], 
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit {
-  products: any[] = []; 
-  filteredProducts: any[] = []; 
-  searchTerm: string = ''; 
+  appidInput: number | null = null;
+  products: any[] = [];
+  filteredProducts: any[] = [];
+  searchTerm: string = '';
+  errorMessage: string = '';
+  hasSearched: boolean = false;
+ 
+  photo: string = '';
+
   title1 : string = '';
   description1 : string = '';
   title2 : string = '';
@@ -73,15 +79,39 @@ export class ProductsComponent implements OnInit {
   }
  
   
+  buscarJuego(): void {
+    if (!this.appidInput) {
+      this.errorMessage = 'Debes introducir un AppID válido';
+      return;
+    }
+  
+    this.errorMessage = '';
+    this.hasSearched = true;
+  
+    this.service.getJuego(this.appidInput).subscribe({
+      next: (response) => {
+        this.products = response.appnews.newsitems || [];
+        this.filteredProducts = [...this.products];
+        this.photo = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' + this.appidInput + '/header.jpg'
+      },
+      error: () => {
+        this.errorMessage = 'No se pudo obtener información del juego.';
+        this.products = [];
+        this.filteredProducts = [];
+      }
+    });
+  }
+
   searchProducts(): void {
-    if (!this.searchTerm.trim()) {
-      this.filteredProducts = [...this.products]; 
+    const term = this.searchTerm.trim().toLowerCase();
+    if (!term) {
+      this.filteredProducts = [...this.products];
       return;
     }
 
     this.filteredProducts = this.products.filter(product =>
-      product.title?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      product.contents?.toLowerCase().includes(this.searchTerm.toLowerCase())
+      product.title?.toLowerCase().includes(term) ||
+      product.contents?.toLowerCase().includes(term)
     );
   }
 }

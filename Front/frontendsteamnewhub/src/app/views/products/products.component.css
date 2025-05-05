@@ -1,26 +1,18 @@
-/* Fondo y fuente global */
-body {
-    background-color: #000;
-    color: #fff;
-    font-family: 'Orbitron', sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-  }
+
   
-  /* Contenedor general */
+  
   #Productos {
     padding: 4rem 2rem;
   }
   
-  /* Contenedor de tarjetas */
+ 
   .card-container {
     display: flex;
-    flex-wrap: nowrap; /* Que no se bajen a otra línea */
+    flex-wrap: nowrap;
     justify-content: center;
-    gap: 50px; /* Separación entre tarjetas */
+    gap: 50px; 
     margin-top: 2rem;
-    overflow-x: auto; /* Para que puedas hacer scroll si se salen del ancho */
+    overflow-x: auto; 
     padding: 1rem;
   }
   
