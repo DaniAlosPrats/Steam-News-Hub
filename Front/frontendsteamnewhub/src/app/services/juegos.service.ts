@@ -42,7 +42,16 @@ public getFavoritos(): Observable<Favoritos> {
     'http://localhost:8000/api/favoritos'
   );
 }
+public postUsuario(usuario: Usuario): Observable<Usuario> {
+  return this.http.post<Usuario>(
+    'http://localhost:8000/api/usuarios',
+    usuario
+  );
+}
 
 
 
 }
+
+
+
