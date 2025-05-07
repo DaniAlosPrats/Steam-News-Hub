@@ -21,21 +21,44 @@ export class LoginComponent {
  
 
   onSubmit(): void {
-     
-      this.juegoService.getAdmins().subscribe({
-        next: (response) => console.log('Admins:', response),
-        error: (err) => console.error('Error al obtener admins:', err)
-      });
-      
-    
+    const username = this.username.trim();
+    const password = this.password.trim();
   
-     
-      this.juegoService.getUsuarios().subscribe({
-        next: (response) => console.log('Usuarios:', response),
-        error: (err) => console.error('Error al obtener usuarios:', err)
-      });
+    if (!username || !password) {
+      alert('Por favor, completa todos los campos.');
+      return;
     }
-
-  }
   
+    this.juegoService.getAdmins().subscribe({
+      next: (response) => {
+        const admins = response.member;
+        const admin = admins.find((a: any) => a.nombre === username && a.contraseña === password);
+        if (admin) {
+          this.router.navigate(['/home']);
+          alert('Bienvenido, administrador.');
+          return;
+        }
 
+  
+        this.juegoService.getUsuarios().subscribe({
+  next: (response) => { 
+    const usuarios = response.member;
+    const usuario = usuarios.find((u: any) => u.nombre === username && u.contrseña === password);
+    if (usuario) {
+      this.router.navigate(['/home']);
+      alert('Bienvenido, usuario.');
+      return;
+    }
+          
+      },
+      error: (err) => {
+        console.error('Error al obtener admins:', err);
+        alert('Error al intentar iniciar sesión como admin.');
+      }
+    });
+  }
+
+  });
+  
+  }
+}

@@ -95,11 +95,7 @@ export class ProductsComponent implements OnInit {
         this.filteredProducts = [...this.products];
         this.photo = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' + this.appidInput + '/header.jpg'
       },
-      error: () => {
-        this.errorMessage = 'No se pudo obtener información del juego.';
-        this.products = [];
-        this.filteredProducts = [];
-      }
+      
     });
   }
 
