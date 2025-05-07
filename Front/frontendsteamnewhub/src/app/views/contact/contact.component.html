@@ -1,1 +1,35 @@
-<p>contact works!</p>
+<div class="col-md-8 mx-auto container-fluid" style="margin-top: 100px; margin-bottom: 100px;">
+
+    <div class="rounded p-4 bg-dark text-white">
+      <form>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre"
+              aria-describedby="ayuda-nombre" aria-label="Inserte su nombre" placeholder="Tu nombre" required>
+          </div>
+  
+          <div class="col-md-6 mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email"
+              aria-label="Inserte su email" placeholder="ejemplo@email.com" required>
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label for="subject" class="form-label">Asunto</label>
+          <input type="text" class="form-control" id="subject" name="subject" placeholder="Motivo del mensaje">
+        </div>
+  
+        <div class="mb-3">
+          <label for="message" class="form-label">Mensaje</label>
+          <textarea class="form-control" id="message" name="message" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+        </div>
+  
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary" aria-label="Enviar formulario">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

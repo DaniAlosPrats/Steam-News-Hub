@@ -1,6 +1,4 @@
 
-  
-  
   #Productos {
     padding: 4rem 2rem;
   }
@@ -14,5 +12,12 @@
     margin-top: 2rem;
     overflow-x: auto; 
     padding: 1rem;
+    max-width: 100%;
+    
   }
   
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

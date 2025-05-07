@@ -18,6 +18,7 @@ export class ProductsComponent implements OnInit {
   searchTerm: string = '';
   errorMessage: string = '';
   hasSearched: boolean = false;
+  Back : boolean = false;
  
   photo: string = '';
 
@@ -114,4 +115,5 @@ export class ProductsComponent implements OnInit {
       product.contents?.toLowerCase().includes(term)
     );
   }
+  
 }
