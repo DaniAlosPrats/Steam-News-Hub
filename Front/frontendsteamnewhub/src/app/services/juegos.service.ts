@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Steam } from '../models/response.interface'; 
 import { Admin } from '../models/admins.response.interface';
 import { Favoritos } from '../models/favoritos.response.interface';
 import { Usuario } from '../models/usuario.response.interface';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
@@ -42,16 +43,36 @@ public getFavoritos(): Observable<Favoritos> {
     'http://localhost:8000/api/favoritos'
   );
 }
+
+
 public postUsuario(usuario: Usuario): Observable<Usuario> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/ld+json',
+    'Accept': 'application/ld+json'
+  });
+
+  
+  const userDataToSend: any = {
+    nombre: usuario.member[0].nombre, 
+    correo_electronico: usuario.member[0].correo_electronico,
+    contraseña: usuario.member[0].contraseña,
+  };
+
   return this.http.post<Usuario>(
-    'http://localhost:8000/api/usuarios',
-    usuario
+    'http://localhost:8000/api/usuarios', 
+    userDataToSend, 
+    { headers }
   );
 }
 
 
 
+
 }
 
 
 
+
+ 
+
+  

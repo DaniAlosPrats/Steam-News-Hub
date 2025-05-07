@@ -8,7 +8,7 @@ export interface Usuario {
 
 export interface Member {
     nombre:             string;
-    contrseña:          string;
+    contraseña:          string;
     correo_electronico: string;
     favoritos:          string[];
     correoElectronico:  string;
