@@ -45,7 +45,7 @@ public getFavoritos(): Observable<Favoritos> {
 }
 
 
-public postUsuario(usuario: Usuario): Observable<Usuario> {
+public postUsuario(usuario: any): Observable<Usuario> {
   const headers = new HttpHeaders({
     'Content-Type': 'application/ld+json',
     'Accept': 'application/ld+json'

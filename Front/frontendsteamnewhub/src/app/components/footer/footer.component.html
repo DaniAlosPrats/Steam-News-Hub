@@ -1,37 +1,30 @@
-<footer style="background-color: #07182F; padding: 20px 0; color: white; font-family: 'Orbitron', sans-serif;">
-  <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; padding: 0 20px;">
-    
-    
-    <div style="flex: 1; min-width: 150px; display: flex; justify-content: center;" routerLink="/home">
-      <img src="logos/logo.png" alt="Steam News Hub Logo" style="height: 60px;">
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-logo" routerLink="/home">
+      <img src="logos/logo.png" alt="Steam News Hub Logo" class="logo-img">
     </div>
 
-    
-    <div style="flex: 1; min-width: 200px; margin-top: 10px;">
-      <h4 style="margin-bottom: 10px;">Políticas</h4>
-      <ul style="list-style: none; padding: 0; margin: 0;">
-        <li><a href="#" style="color: white; text-decoration: none;">Aviso Legal</a></li>
-        <li><a href="#" style="color: white; text-decoration: none;">Política de privacidad</a></li>
-        <li><a href="#" style="color: white; text-decoration: none;">Política de cookies</a></li>
-        <li><a href="#" style="color: white; text-decoration: none;">Accesibilidad</a></li>
+    <div class="footer-section">
+      <h4 class="footer-heading">Políticas</h4>
+      <ul class="footer-list">
+        <li><a href="#" class="footer-link">Aviso Legal</a></li>
+        <li><a href="#" class="footer-link">Política de privacidad</a></li>
+        <li><a href="#" class="footer-link">Política de cookies</a></li>
+        <li><a href="#" class="footer-link">Accesibilidad</a></li>
       </ul>
     </div>
 
-    
-    <div style="flex: 1; min-width: 200px; margin-top: 10px;">
-      <h4 style="margin-bottom: 10px;">Ayuda</h4>
-      <ul style="list-style: none; padding: 0; margin: 0;">
-        <li><a  routerLink="/contact" routerLinkActive="active" style="color: white; text-decoration: none;">Contacto</a></li>
+    <div class="footer-section">
+      <h4 class="footer-heading">Ayuda</h4>
+      <ul class="footer-list">
+        <li><a routerLink="/contact" routerLinkActive="active" class="footer-link">Contacto</a></li>
       </ul>
     </div>
-
   </div>
 
-  
-  <div style="border-top: 1px solid #1b2d44; margin: 20px auto; width: 90%;"></div>
+  <div class="footer-divider"></div>
 
- 
-  <div style="text-align: center; font-size: 0.9rem;">
+  <div class="footer-copyright">
     © 2025 <strong>Steam News Hub</strong>
   </div>
 </footer>
