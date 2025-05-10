@@ -1,6 +1,6 @@
 <body>
   <div id="Productos">
-    <section>
+    <section >
       <h1>Productos</h1>
 
       <h2>Buscar noticias por AppID</h2>
@@ -13,7 +13,9 @@
           placeholder="Introduce el nombre del juego"
           required />
         <button type="submit">Buscar</button>
+        
       </form>
+      <button type="button" (click)="volver()">Volver</button>
     </section>
 
     @if (hasSearched === true) {

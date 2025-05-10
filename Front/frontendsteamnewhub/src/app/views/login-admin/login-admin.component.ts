@@ -1,23 +1,28 @@
 import { Component } from '@angular/core';
-import { JuegosService } from '../../services/juegos.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // Importa FormsModule
 import { RouterModule, Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { JuegosService } from '../../services/juegos.service';
+import { AuthService } from '../../services/auth.service'; // Importa AuthService
 
 @Component({
   selector: 'app-login-admin',
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './login-admin.component.html',
-  styleUrl: './login-admin.component.css'
+  styleUrls: ['./login-admin.component.css']
 })
+
+
 export class LoginAdminComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private juegoService: JuegosService, private router: Router) {}
+  constructor(
+    private juegoService: JuegosService,
+    private router: Router,
 
-  
- 
+    private authService: AuthService 
+  ) {}
 
   onSubmit(): void {
     const username = this.username.trim();
@@ -34,8 +39,14 @@ export class LoginAdminComponent {
         const admin = admins.find((a: any) => a.nombre === username && a.contraseña === password);
 
         if (admin) {
-          alert('Bienvenido, administrador.');
+        
+          
+          
+          this.authService.login(admin, true); 
+
           this.router.navigate(['/home']);
+          
+
         } else {
           alert('Credenciales incorrectas.');
         }
@@ -47,5 +58,3 @@ export class LoginAdminComponent {
     });
   }
 }
-
-

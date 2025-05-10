@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { JuegosService } from '../../services/juegos.service';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service'; // Importa el AuthService
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,29 +16,39 @@ import { FormsModule } from '@angular/forms';
 export class LoginComponent {
   username: string = '';
   password: string = '';
+  registed: boolean = false;
 
-  constructor(private juegoService: JuegosService, private router: Router) {}
-
-  
- 
+  constructor(
+    private juegoService: JuegosService,
+    private router: Router,
+    private authService: AuthService 
+  ) {}
 
   onSubmit(): void {
     const username = this.username.trim();
     const password = this.password.trim();
-  
+
     if (!username || !password) {
       alert('Por favor, completa todos los campos.');
       return;
     }
-  
+
     this.juegoService.getUsuarios().subscribe({
       next: (response) => {
         const usuarios = response.member;
         const usuario = usuarios.find((u: any) => u.nombre === username && u.contraseña === password);
-  
+
         if (usuario) {
-          alert('Bienvenido, usuario.');
+          
+          localStorage.setItem('currentUser', JSON.stringify(usuario));
+
+          
+          this.authService.login(false); 
+          
+          
           this.router.navigate(['/home']);
+           
+          
         } else {
           alert('Credenciales incorrectas.');
         }
@@ -47,5 +59,4 @@ export class LoginComponent {
       }
     });
   }
-  
 }

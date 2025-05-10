@@ -22,6 +22,14 @@
     max-width: 1000px;
     margin: 0 auto;
   }
-  
-  
+  .shadow-img {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2); 
+    border-radius: 8px; 
+  }
+  hr.separator {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, #ffffff33, #ffffff88, #ffffff33);
+    margin: 4rem 0;
+  }
   

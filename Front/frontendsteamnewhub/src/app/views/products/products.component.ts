@@ -78,6 +78,11 @@ export class ProductsComponent implements OnInit {
       
     });
   }
+  volver(): void {
+  this.hasSearched = false;
+  this.appidInput = null;
+  this.filteredProducts = [...this.products];
+}
  
   
   buscarJuego(): void {
