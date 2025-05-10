@@ -91,5 +91,10 @@
         </div>
       </section>
     }
+    @if (hasSearched && filteredProducts.length === 0){
+      <div class="no-info">
+         No hay información disponible para este Juego.
+      </div>
+    }
   </div>
 </body>

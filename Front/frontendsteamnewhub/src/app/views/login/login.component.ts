@@ -21,7 +21,7 @@ export class LoginComponent {
   constructor(
     private juegoService: JuegosService,
     private router: Router,
-    private authService: AuthService 
+    private authService: AuthService
   ) {}
 
   onSubmit(): void {
@@ -39,16 +39,8 @@ export class LoginComponent {
         const usuario = usuarios.find((u: any) => u.nombre === username && u.contraseña === password);
 
         if (usuario) {
-          
-          localStorage.setItem('currentUser', JSON.stringify(usuario));
-
-          
-          this.authService.login(false); 
-          
-          
+          this.authService.login(usuario, false); 
           this.router.navigate(['/home']);
-           
-          
         } else {
           alert('Credenciales incorrectas.');
         }

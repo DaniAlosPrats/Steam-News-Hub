@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Importa FormsModule
+import { FormsModule } from '@angular/forms'; 
 import { RouterModule, Router } from '@angular/router';
 import { JuegosService } from '../../services/juegos.service';
-import { AuthService } from '../../services/auth.service'; // Importa AuthService
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login-admin',
@@ -20,8 +20,7 @@ export class LoginAdminComponent {
   constructor(
     private juegoService: JuegosService,
     private router: Router,
-
-    private authService: AuthService 
+    private authService: AuthService
   ) {}
 
   onSubmit(): void {
@@ -39,21 +38,15 @@ export class LoginAdminComponent {
         const admin = admins.find((a: any) => a.nombre === username && a.contraseña === password);
 
         if (admin) {
-        
-          
-          
-          this.authService.login(admin, true); 
-
+          this.authService.login(admin, true);
           this.router.navigate(['/home']);
-          
-
         } else {
           alert('Credenciales incorrectas.');
         }
       },
       error: (err) => {
         console.error('Error al obtener los administradores:', err);
-        alert('Hubo un error al verificar las credenciales. Intenta de nuevo más tarde.');
+        alert('Hubo un error al verificar las credenciales.');
       }
     });
   }

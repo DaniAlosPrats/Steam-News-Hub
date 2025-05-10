@@ -5,48 +5,38 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  private isAdminSubject = new BehaviorSubject<boolean>(false);
+  isAdmin$ = this.isAdminSubject.asObservable();
 
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
-  private isAdminSubject = new BehaviorSubject<boolean>(false);
-  isAdmin$ = this.isAdminSubject.asObservable();
+  private currentUserSubject = new BehaviorSubject<any>(null);
+  currentUser$ = this.currentUserSubject.asObservable();
 
   constructor() {
-    // Verificar si hay datos de sesión guardados
-    this.checkLocalStorage();
-  }
-
-  private checkLocalStorage(): void {
-    const userStr = localStorage.getItem('currentUser');
-    const isAdmin = localStorage.getItem('isAdmin') === 'true';
     
-    if (userStr) {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      this.currentUserSubject.next(user);
       this.isLoggedInSubject.next(true);
-      this.isAdminSubject.next(isAdmin);
+      this.isAdminSubject.next(user?.esAdmin || false);
     }
   }
 
-  login(user: any, isAdmin: boolean = false) {
-    this.isLoggedInSubject.next(true);
-    this.isAdminSubject.next(isAdmin);
-
-    // Guardar información del usuario y el estado de admin en localStorage
-    localStorage.setItem('currentUser', JSON.stringify(user));
-    localStorage.setItem('isAdmin', isAdmin.toString());
-  }
+ login(user: any, isAdmin: boolean = false) {
+  this.currentUserSubject.next(user);
+  this.isLoggedInSubject.next(true);
+  this.isAdminSubject.next(isAdmin);
+  localStorage.setItem('currentUser', JSON.stringify({ ...user, esAdmin: isAdmin }));
+  localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
+}
 
   logout() {
+    this.currentUserSubject.next(null);
     this.isLoggedInSubject.next(false);
     this.isAdminSubject.next(false);
-
-    // Limpiar localStorage al cerrar sesión
     localStorage.removeItem('currentUser');
-    localStorage.removeItem('isAdmin');
-  }
-
-  getCurrentUser(): any | null {
-    const userStr = localStorage.getItem('currentUser');
-    return userStr ? JSON.parse(userStr) : null;
   }
 }

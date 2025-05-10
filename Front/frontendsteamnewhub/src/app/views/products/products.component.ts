@@ -85,24 +85,34 @@ export class ProductsComponent implements OnInit {
 }
  
   
-  buscarJuego(): void {
-    if (!this.appidInput) {
-      this.errorMessage = 'Debes introducir un AppID válido';
-      return;
-    }
-  
-    this.errorMessage = '';
-    this.hasSearched = true;
-  
-    this.service.getJuego(this.appidInput).subscribe({
-      next: (response) => {
-        this.products = response.appnews.newsitems || [];
-        this.filteredProducts = [...this.products];
-        this.photo = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' + this.appidInput + '/header.jpg'
-      },
-      
-    });
+ buscarJuego(): void {
+  if (!this.appidInput) {
+    this.errorMessage = 'Debes introducir un AppID válido';
+    return;
   }
+
+  this.errorMessage = '';
+  this.hasSearched = true;
+
+  this.service.getJuego(this.appidInput).subscribe({
+    next: (response) => {
+      
+      if (response.appnews && response.appnews.newsitems && response.appnews.newsitems.length > 0) {
+        this.products = response.appnews.newsitems;
+      } else {
+        this.products = []; 
+      }
+
+      this.filteredProducts = [...this.products];
+      this.photo = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' + this.appidInput + '/header.jpg';
+    },
+    error: () => {
+      this.products = [];
+      this.filteredProducts = [];
+      this.errorMessage = 'Error al obtener datos de la API.';
+    }
+  });
+}
 
   searchProducts(): void {
     const term = this.searchTerm.trim().toLowerCase();
