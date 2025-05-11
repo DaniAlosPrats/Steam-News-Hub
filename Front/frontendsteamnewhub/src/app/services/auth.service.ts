@@ -26,11 +26,15 @@ export class AuthService {
   }
 
  login(user: any, isAdmin: boolean = false) {
-  this.currentUserSubject.next(user);
+  const normalizedUser = {
+    nombre: user.nombre || 'Usuario', 
+    email: user.email || '',
+    esAdmin: isAdmin
+  };
+  this.currentUserSubject.next(normalizedUser);
   this.isLoggedInSubject.next(true);
   this.isAdminSubject.next(isAdmin);
-  localStorage.setItem('currentUser', JSON.stringify({ ...user, esAdmin: isAdmin }));
-  localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
+  localStorage.setItem('currentUser', JSON.stringify(normalizedUser));
 }
 
   logout() {
@@ -40,3 +44,4 @@ export class AuthService {
     localStorage.removeItem('currentUser');
   }
 }
+

@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { JuegosService } from '../../services/juegos.service';
 import { CardProductsComponent } from '../../components/card-products/card-products.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service'; 
+import { CardfavComponent } from '../../components/cardfav/cardfav.component';
+
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CardProductsComponent, CommonModule, FormsModule], 
+  imports: [CardProductsComponent, CommonModule, FormsModule, CardfavComponent], 
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -18,26 +21,28 @@ export class ProductsComponent implements OnInit {
   searchTerm: string = '';
   errorMessage: string = '';
   hasSearched: boolean = false;
-  Back : boolean = false;
- 
+  Back: boolean = false;
+  isLoggedIn: boolean = false;
+
   photo: string = '';
 
-  title1 : string = '';
-  description1 : string = '';
-  title2 : string = '';
-  description2 : string = '';
-  title3 : string = '';
-  description3 : string = '';
-  title4 : string = '';
-  description4 : string = '';
-  title5 : string = '';
-  description5 : string = '';
-  title6 : string = '';
-  description6 : string = '';
+  title1 = ''; description1 = '';
+  title2 = ''; description2 = '';
+  title3 = ''; description3 = '';
+  title4 = ''; description4 = '';
+  title5 = ''; description5 = '';
+  title6 = ''; description6 = '';
 
-  constructor(public service: JuegosService) {}
+  constructor(
+    public service: JuegosService,
+    public authService: AuthService
+  ) {}
 
   ngOnInit(): void {
+    this.authService.isLoggedIn$.subscribe(value => {
+      this.isLoggedIn = value;
+    });
+
     this.getResponse();
     this.getResponse2();
   }
@@ -52,14 +57,12 @@ export class ProductsComponent implements OnInit {
         this.title3 = response.appnews.newsitems[2].title;
         this.description3 = response.appnews.newsitems[2].contents;
 
-        
-        
         this.products = response.appnews.newsitems;
         this.filteredProducts = [...this.products]; 
-      },
-      
+      }
     });
   }
+
   public getResponse2(): void {
     this.service.getResponse2().subscribe({
       next: (response) => { 
@@ -70,61 +73,48 @@ export class ProductsComponent implements OnInit {
         this.title6 = response.appnews.newsitems[2].title;
         this.description6 = response.appnews.newsitems[2].contents;
 
-        
-        
         this.products = response.appnews.newsitems;
         this.filteredProducts = [...this.products]; 
-      },
-      
+      }
     });
   }
+
   volver(): void {
-  this.hasSearched = false;
-  this.appidInput = null;
-  this.filteredProducts = [...this.products];
-}
- 
-  
- buscarJuego(): void {
-  if (!this.appidInput) {
-    this.errorMessage = 'Debes introducir un AppID válido';
-    return;
+    this.hasSearched = false;
+    this.appidInput = null;
+    this.filteredProducts = [...this.products];
   }
 
-  this.errorMessage = '';
-  this.hasSearched = true;
-
-  this.service.getJuego(this.appidInput).subscribe({
-    next: (response) => {
-      
-      if (response.appnews && response.appnews.newsitems && response.appnews.newsitems.length > 0) {
-        this.products = response.appnews.newsitems;
-      } else {
-        this.products = []; 
-      }
-
-      this.filteredProducts = [...this.products];
-      this.photo = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' + this.appidInput + '/header.jpg';
-    },
-    error: () => {
-      this.products = [];
-      this.filteredProducts = [];
-      this.errorMessage = 'Error al obtener datos de la API.';
-    }
-  });
-}
-
-  searchProducts(): void {
-    const term = this.searchTerm.trim().toLowerCase();
-    if (!term) {
-      this.filteredProducts = [...this.products];
+  buscarJuego(): void {
+    if (!this.appidInput) {
+      this.errorMessage = 'Debes introducir un AppID válido';
       return;
     }
 
-    this.filteredProducts = this.products.filter(product =>
-      product.title?.toLowerCase().includes(term) ||
-      product.contents?.toLowerCase().includes(term)
-    );
+    this.errorMessage = '';
+    this.hasSearched = true;
+
+    this.service.getJuego(this.appidInput).subscribe({
+      next: (response) => {
+        this.products = response.appnews?.newsitems || [];
+        this.filteredProducts = [...this.products];
+        this.photo = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' + this.appidInput + '/header.jpg';
+      },
+      error: () => {
+        this.products = [];
+        this.filteredProducts = [];
+        this.errorMessage = 'Error al obtener datos de la API.';
+      }
+    });
   }
-  
+
+  searchProducts(): void {
+    const term = this.searchTerm.trim().toLowerCase();
+    this.filteredProducts = term
+      ? this.products.filter(product =>
+          product.title?.toLowerCase().includes(term) ||
+          product.contents?.toLowerCase().includes(term)
+        )
+      : [...this.products];
+  }
 }
