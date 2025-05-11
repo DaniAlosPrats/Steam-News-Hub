@@ -12,4 +12,15 @@ export class CardfavComponent {
   @Input() description: string = 'My Text';
   @Input() photo: string = 'url(https://www.lavanguardia.com/files/og_thumbnail/uploads/2021/03/05/60421be64918d.jpeg)';
 
+  isFavorite: boolean = false;
+  isLiked: boolean = false;
+
+  toggleFavorite() {
+    this.isFavorite = !this.isFavorite;
+  }
+
+  toggleLike() {
+    this.isLiked = !this.isLiked;
+  }
+
 }

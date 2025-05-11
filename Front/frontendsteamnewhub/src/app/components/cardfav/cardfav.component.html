@@ -1,10 +1,23 @@
-<div class="card" >
-    <div class="photo" [ngStyle]="{'background-image': photo}"></div>
-    <div class="footer">
-      <h2 class="card-title">{{ title }}</h2>
-      <div class="description-scroll">
-        {{ description }}
-      </div>
+<div class="card">
+  <div class="photo" [ngStyle]="{'background-image': photo}"></div>
+  <div class="footer">
+    <h2 class="card-title">{{ title }}</h2>
+    <div class="description-scroll">
+      {{ description }}
     </div>
+   <div class="actions">
+      
+      @if (!isFavorite) {
+        <i class="bi bi-heart" (click)="toggleFavorite()"></i>
+      } @else {
+        <i class="bi bi-heart-fill" (click)="toggleFavorite()" style="color: red"></i>
+      }
+
+      
+      @if (!isLiked) {
+        <i class="bi bi-star" (click)="toggleLike()"></i>
+      } @else {
+        <i class="bi bi-star-fill" (click)="toggleLike()" style="color: gold"></i>
+      }
   </div>
-  
+</div>
