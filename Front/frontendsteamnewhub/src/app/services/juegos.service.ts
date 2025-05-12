@@ -64,6 +64,26 @@ public postUsuario(usuario: any): Observable<Usuario> {
     { headers }
   );
 }
+public addFavorito(favorito: any): Observable<Favoritos> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/ld+json',
+    'Accept': 'application/ld+json'
+  });
+
+  const favoritoDataToSend = {
+    gameId: favorito.id_juego.toString(), 
+    likes: true,                      
+    favoritos: true,
+    users: '/api/usuarios/3'        
+  };
+
+  return this.http.post<Favoritos>(
+    'http://localhost:8000/api/favoritos',
+    favoritoDataToSend,
+    { headers }
+  );
+}
+
 
 
 

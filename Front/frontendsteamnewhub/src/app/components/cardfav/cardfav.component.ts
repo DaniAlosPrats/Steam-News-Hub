@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgStyle } from '@angular/common';
 
 @Component({
@@ -12,15 +12,30 @@ export class CardfavComponent {
   @Input() description: string = 'My Text';
   @Input() photo: string = 'url(https://www.lavanguardia.com/files/og_thumbnail/uploads/2021/03/05/60421be64918d.jpeg)';
 
-  isFavorite: boolean = false;
-  isLiked: boolean = false;
+     
+  @Output() likeToggled = new EventEmitter<any>();
 
-  toggleFavorite() {
-    this.isFavorite = !this.isFavorite;
-  }
+   isFavorite: boolean = false;
+  isLiked: boolean = false;
+@Input() gameId!: number;
+@Output() favoriteToggled = new EventEmitter<any>();
+
+toggleFavorite() {
+  this.isFavorite = !this.isFavorite;
+  console.log('Game ID al hacer click en favorito:', this.gameId);
+  this.favoriteToggled.emit({
+    isFavorite: this.isFavorite,
+    id_juego: this.gameId
+  });
+}
 
   toggleLike() {
     this.isLiked = !this.isLiked;
+    console.log('Game ID al hacer click en favorito:', this.gameId);
+    this.likeToggled.emit({
+    isFavorite: this.isFavorite,
+    id_juego: this.gameId
+  });
   }
 
 }

@@ -46,6 +46,7 @@
                   [title]="title1"
                   [description]="description1"
                   [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'">
+                  
                 </app-card-products>
               </article>
               <article class="col-md-3 mb-3">
@@ -104,7 +105,10 @@
                 <app-cardfav 
                   [title]="product.title"
                   [description]="product.contents"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/' + appidInput + '/header.jpg)'">
+                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/' + appidInput + '/header.jpg)'"
+                  [gameId]="420"
+                 (favoriteToggled)="addToFavorites($event)"
+                 (likeToggled)="handleLike($event)">>
                 </app-cardfav>
               </article>
             }
@@ -122,21 +126,30 @@
                 <app-cardfav
                   [title]="title1"
                   [description]="description1"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'">
+                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'"
+                  [gameId]="420"
+                 (favoriteToggled)="addToFavorites($event)"
+                 (likeToggled)="handleLike($event)">>
                 </app-cardfav>
               </article>
               <article class="col-md-3 mb-3">
                 <app-cardfav
                   [title]="title2"
                   [description]="description2"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'">
+                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'"
+                  [gameId]="420"
+                 (favoriteToggled)="addToFavorites($event)"
+                 (likeToggled)="handleLike($event)">>
                 </app-cardfav>
               </article>
               <article class="col-md-3 mb-3">
                 <app-cardfav
                   [title]="title3"
                   [description]="description3"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'">
+                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'"
+                  [gameId]="420"
+                 (favoriteToggled)="addToFavorites($event)"
+                 (likeToggled)="handleLike($event)">>
                 </app-cardfav>
               </article>
             </div>
@@ -145,24 +158,33 @@
           <div class="card-container">
             <div class="row g-3">
               <article class="col-md-3 mb-3">
-                <app-cardfav
-                  [title]="title4"
-                  [description]="description4"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'">
-                </app-cardfav>
+               <app-cardfav
+                 [title]="title1"
+                [description]="description1"
+                 [photo]="'https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg'"
+                 [gameId]="440"
+                 (favoriteToggled)="addToFavorites($event)"
+                 (likeToggled)="handleLike($event)">
+                  </app-cardfav>
               </article>
               <article class="col-md-3 mb-3">
                 <app-cardfav
                   [title]="title5"
                   [description]="description5"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'">
+                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'"
+                  [gameId]="440"
+                 (favoriteToggled)="addToFavorites($event)"
+                 (likeToggled)="handleLike($event)">>
                 </app-cardfav>
               </article>
               <article class="col-md-3 mb-3">
                 <app-cardfav
                   [title]="title6"
                   [description]="description6"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'">
+                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'"
+                  [gameId]="440"
+                 (favoriteToggled)="addToFavorites($event)"
+                 (likeToggled)="handleLike($event)">>
                 </app-cardfav>
               </article>
             </div>

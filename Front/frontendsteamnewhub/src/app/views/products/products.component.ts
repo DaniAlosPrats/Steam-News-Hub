@@ -117,4 +117,33 @@ export class ProductsComponent implements OnInit {
         )
       : [...this.products];
   }
+
+  addToFavorites(event: { isFavorite: boolean, id_juego: number }): void {
+  if (event.isFavorite && this.isLoggedIn) {
+    const favoritoData = {
+      id_juego: event.id_juego,
+      id_usuario: 'api/usuarios/3'
+    };
+
+    this.service.addFavorito(favoritoData).subscribe({
+      next: () => console.log('Agregado a favoritos'),
+      error: err => console.error('Error al agregar a favoritos', err)
+    });
+  } 
+}
+
+handleLike(event: {isLiked: boolean, id_juego: number}): void {
+  if (event.isLiked && this.isLoggedIn) {
+    const likeData = {
+      id_juego: event.id_juego,
+      id_usuario: 'api/usuarios/3'
+    };
+
+    this.service.addFavorito(likeData).subscribe({
+      next: () => console.log('Juego marcado como gustado'),
+      error: err => console.error('Error al marcar como gustado', err)
+    });
+  
+}
+}
 }
