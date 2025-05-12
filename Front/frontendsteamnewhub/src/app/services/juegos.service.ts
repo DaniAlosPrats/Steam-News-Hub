@@ -72,9 +72,9 @@ public addFavorito(favorito: any): Observable<Favoritos> {
 
   const favoritoDataToSend = {
     gameId: favorito.id_juego.toString(), 
-    likes: true,                      
-    favoritos: true,
-    users: '/api/usuarios/3'        
+    likes: favorito.likes || false,
+    favoritos: favorito.favoritos || false,
+    users: favorito.id_usuario
   };
 
   return this.http.post<Favoritos>(

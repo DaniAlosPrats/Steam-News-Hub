@@ -27,6 +27,7 @@ export class AuthService {
 
  login(user: any, isAdmin: boolean = false) {
   const normalizedUser = {
+    id: user.id, 
     nombre: user.nombre || 'Usuario', 
     email: user.email || '',
     esAdmin: isAdmin

@@ -120,30 +120,34 @@ export class ProductsComponent implements OnInit {
 
   addToFavorites(event: { isFavorite: boolean, id_juego: number }): void {
   if (event.isFavorite && this.isLoggedIn) {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
     const favoritoData = {
       id_juego: event.id_juego,
-      id_usuario: 'api/usuarios/3'
+      id_usuario: `/api/usuarios/${currentUser.id}` 
     };
 
     this.service.addFavorito(favoritoData).subscribe({
-      next: () => console.log('Agregado a favoritos'),
-      error: err => console.error('Error al agregar a favoritos', err)
+      next: () => console.log('Agregado a favoritos')
     });
   } 
 }
 
-handleLike(event: {isLiked: boolean, id_juego: number}): void {
-  if (event.isLiked && this.isLoggedIn) {
+
+handleLike(event: { isLiked: boolean, id_juego: number }): void {
+  if (this.isLoggedIn) {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
     const likeData = {
       id_juego: event.id_juego,
-      id_usuario: 'api/usuarios/3'
+      id_usuario: `/api/usuarios/${currentUser.id}`,
+      likes: event.isLiked,
+      favoritos: false 
     };
 
     this.service.addFavorito(likeData).subscribe({
-      next: () => console.log('Juego marcado como gustado'),
-      error: err => console.error('Error al marcar como gustado', err)
+      next: () => console.log('Like registrado en la base de datos')
     });
-  
-}
+  }
 }
 }

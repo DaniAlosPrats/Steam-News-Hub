@@ -14,11 +14,16 @@ export class CardfavComponent {
 
      
   @Output() likeToggled = new EventEmitter<any>();
+  @Input() gameId: number | null = null;
+  @Output() favoriteToggled = new EventEmitter<any>();
 
    isFavorite: boolean = false;
   isLiked: boolean = false;
-@Input() gameId!: number;
-@Output() favoriteToggled = new EventEmitter<any>();
+   ngOnInit(): void {
+    const likedGames = JSON.parse(localStorage.getItem('likedGames') || '[]');
+    this.isLiked = likedGames.includes(this.gameId);
+  }
+
 
 toggleFavorite() {
   this.isFavorite = !this.isFavorite;
@@ -29,13 +34,24 @@ toggleFavorite() {
   });
 }
 
-  toggleLike() {
-    this.isLiked = !this.isLiked;
-    console.log('Game ID al hacer click en favorito:', this.gameId);
-    this.likeToggled.emit({
-    isFavorite: this.isFavorite,
+ toggleLike() {
+  this.isLiked = !this.isLiked;
+  const likedGames = JSON.parse(localStorage.getItem('likedGames') || '[]');
+  if (this.isLiked) {
+    if (!likedGames.includes(this.gameId)) {
+      likedGames.push(this.gameId);
+    }
+  } else {
+    const index = likedGames.indexOf(this.gameId);
+    if (index !== -1) {
+      likedGames.splice(index, 1);
+    }
+  }
+  localStorage.setItem('likedGames', JSON.stringify(likedGames));
+  this.likeToggled.emit({
+    isLiked: this.isLiked,
     id_juego: this.gameId
   });
-  }
+}
 
 }

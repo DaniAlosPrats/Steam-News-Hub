@@ -106,9 +106,9 @@
                   [title]="product.title"
                   [description]="product.contents"
                   [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/' + appidInput + '/header.jpg)'"
-                  [gameId]="420"
+                  [gameId]="appidInput"
                  (favoriteToggled)="addToFavorites($event)"
-                 (likeToggled)="handleLike($event)">>
+                 (likeToggled)="handleLike($event)">
                 </app-cardfav>
               </article>
             }
