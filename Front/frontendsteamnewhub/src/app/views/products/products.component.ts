@@ -124,7 +124,9 @@ export class ProductsComponent implements OnInit {
 
     const favoritoData = {
       id_juego: event.id_juego,
-      id_usuario: `/api/usuarios/${currentUser.id}` 
+      id_usuario: `/api/usuarios/${currentUser.id}`,
+      favoritos: true,
+      likes: false
     };
 
     this.service.addFavorito(favoritoData).subscribe({
