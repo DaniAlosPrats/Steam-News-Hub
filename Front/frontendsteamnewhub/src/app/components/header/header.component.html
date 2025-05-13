@@ -47,7 +47,7 @@
         @if(isLoggedIn === true) {
          <ul class="navbar-nav fs-5 pe-lg-3" >
           <li class="nav-item">
-            <a class="nav-link">Hola, {{ username }}</a>
+            <a routerLink="/perfil" routerLinkActive="active" class="nav-link">Hola, {{ username }}</a>
           </li>
           <li class="nav-item">
             <a (click)="logout()" class="nav-link">Cerrar Sesión</a>

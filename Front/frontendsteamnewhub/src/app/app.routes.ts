@@ -9,6 +9,7 @@ import { PoliticaPrivacidadComponent } from './views/politica-privacidad/politic
 import { PoliticaCookiesComponent } from './views/politica-cookies/politica-cookies.component';
 import { AccesibilidadComponent} from './views/accesibilidad/accesibilidad.component';
 import { AvisoLegalComponent } from './views/aviso-legal/aviso-legal.component';
+import { PerfilComponent } from './views/perfil/perfil.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,6 +23,7 @@ export const routes: Routes = [
   {path: 'politica-cookies', component: PoliticaCookiesComponent},
   {path: 'accesibilidad', component: AccesibilidadComponent},
   {path: 'aviso-legal', component: AvisoLegalComponent},
+  {path: 'perfil', component: PerfilComponent},
 
 
 
