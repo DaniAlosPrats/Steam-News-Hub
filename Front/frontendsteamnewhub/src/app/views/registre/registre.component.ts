@@ -15,12 +15,12 @@ export class RegistreComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private apiService = inject(JuegosService);
-
-  signUpForm: FormGroup = this.fb.group({
-    nombre: [''],
-    email: [''],
-    password: ['']
-  });
+  
+signUpForm: FormGroup = this.fb.group({
+  nombre: ['', Validators.required],
+  email: ['', [Validators.required, Validators.email]],
+  password: ['', Validators.required]
+});
 
   registrarUsuario(): void {
     
