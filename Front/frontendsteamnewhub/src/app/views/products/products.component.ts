@@ -95,17 +95,22 @@ export class ProductsComponent implements OnInit {
     this.hasSearched = true;
 
     this.service.getJuego(this.appidInput).subscribe({
-      next: (response) => {
-        this.products = response.appnews?.newsitems || [];
-        this.filteredProducts = [...this.products];
-        this.photo = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' + this.appidInput + '/header.jpg';
-      },
-      error: () => {
-        this.products = [];
-        this.filteredProducts = [];
-        this.errorMessage = 'Error al obtener datos de la API.';
-      }
-    });
+  next: (response) => {
+    if (response.appnews && response.appnews.newsitems) {
+      this.products = response.appnews.newsitems;
+    } else {
+      this.products = [];
+    }
+
+    this.filteredProducts = [...this.products];
+    this.photo = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' + this.appidInput + '/header.jpg';
+  },
+  error: () => {
+    this.products = [];
+    this.filteredProducts = [];
+    this.errorMessage = 'Error al obtener datos de la API.';
+  }
+});
   }
 
   searchProducts(): void {
