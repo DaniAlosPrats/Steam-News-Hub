@@ -120,6 +120,10 @@ public getLikesByUser(userId: number): Observable<Favoritos> {
   );
 }
 
+deleteFavorito(id: number): Observable<any> {
+  return this.http.delete(`/api/favoritos/${id}`);
+}
+
 
 }
 

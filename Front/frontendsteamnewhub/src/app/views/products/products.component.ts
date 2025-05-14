@@ -146,9 +146,10 @@ handleLike(event: { isLiked: boolean, id_juego: number }): void {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const iduser = currentUser.id;
 
+
     const likeData = {
       id_juego: event.id_juego,
-      id_usuario: `/api/usuarios/${currentUser.id}`,
+      id_usuario: `/api/usuarios/${iduser}`,
       likes: event.isLiked,
       favoritos: false 
     };

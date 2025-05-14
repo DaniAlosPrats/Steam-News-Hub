@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark border-bottom border-black">
-  <div class="container-fluid">
+  <div class="container-fluid position-relative">
     
-    
+    <!-- Logo -->
     <a class="navbar-brand ms-3" routerLink="/home">
       <img src="logos/logo.png" alt="Logo de Steam News Hub" width="40px" />
     </a>
 
-    
+    <!-- Toggler -->
     <button
       class="navbar-toggler me-3"
       type="button"
@@ -21,40 +21,40 @@
 
     
     <div class="collapse navbar-collapse" id="navbarNav">
-      <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center justify-content-between w-100">
-        
-        
-        <ul class="navbar-nav mx-lg-auto gap-lg-3 fs-5 text-center text-lg-start">
-          <li class="nav-item">
-            <a routerLink="/home" routerLinkActive="active" class="nav-link">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/juegos" routerLinkActive="active" class="nav-link">Juegos</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/contact" routerLinkActive="active" class="nav-link">Contacto</a>
-          </li>
-        </ul>
+    
+      <ul
+        class="navbar-nav gap-4  position-absolute top-50 start-50 "
+        style="transform: translate(-50%, -50%);">
+        <li class="nav-item">
+          <a routerLink="/home" routerLinkActive="active" class="nav-link">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/juegos" routerLinkActive="active" class="nav-link">Juegos</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/contact" routerLinkActive="active" class="nav-link">Contacto</a>
+        </li>
+      </ul>
 
+     
+      <div class="ms-auto d-flex align-items-center pe-lg-3">
         @if(isLoggedIn === false) {
-        
-        <ul class="navbar-nav fs-5 pe-lg-3">
-          <li class="nav-item">
-            <a routerLink="/login" routerLinkActive="active" class="nav-link">Inicio de Sesion</a>
-          </li>
-        </ul>
-      }
+          <ul class="navbar-nav ">
+            <li class="nav-item">
+              <a routerLink="/login" routerLinkActive="active" class="nav-link">Inicio de Sesión</a>
+            </li>
+          </ul>
+        }
         @if(isLoggedIn === true) {
-         <ul class="navbar-nav fs-5 pe-lg-3" >
-          <li class="nav-item">
-            <a routerLink="/perfil" routerLinkActive="active" class="nav-link">Hola, {{ username }}</a>
-          </li>
-          <li class="nav-item">
-            <a (click)="logout()" class="nav-link">Cerrar Sesión</a>
-          </li>
-        </ul>
-}
-
+          <ul class="navbar-nav ">
+            <li class="nav-item">
+              <a routerLink="/perfil" routerLinkActive="active" class="nav-link">Hola, {{ username }}</a>
+            </li>
+            <li class="nav-item">
+              <a (click)="logout()" class="nav-link">Cerrar Sesión</a>
+            </li>
+          </ul>
+        }
       </div>
     </div>
 
