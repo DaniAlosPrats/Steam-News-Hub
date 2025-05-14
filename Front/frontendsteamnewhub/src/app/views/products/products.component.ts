@@ -109,14 +109,14 @@ export class ProductsComponent implements OnInit {
   }
 
   searchProducts(): void {
-    const term = this.searchTerm.trim().toLowerCase();
-    this.filteredProducts = term
-      ? this.products.filter(product =>
-          product.title?.toLowerCase().includes(term) ||
-          product.contents?.toLowerCase().includes(term)
-        )
-      : [...this.products];
-  }
+  const term = this.searchTerm.trim().toLowerCase();
+
+  this.filteredProducts = this.products.filter(product =>
+    !term ||
+    product.title?.toLowerCase().includes(term) ||
+    product.contents?.toLowerCase().includes(term)
+  );
+}
 
   addToFavorites(event: { isFavorite: boolean, id_juego: number }): void {
   if (event.isFavorite && this.isLoggedIn) {
@@ -139,6 +139,7 @@ export class ProductsComponent implements OnInit {
 handleLike(event: { isLiked: boolean, id_juego: number }): void {
   if (this.isLoggedIn) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const iduser = currentUser.id;
 
     const likeData = {
       id_juego: event.id_juego,
@@ -148,7 +149,9 @@ handleLike(event: { isLiked: boolean, id_juego: number }): void {
     };
 
     this.service.addFavorito(likeData).subscribe({
-      next: () => console.log('Like registrado en la base de datos')
+      next: () => console.log('Agregado a favoritos')
+      
+      
     });
   }
 }

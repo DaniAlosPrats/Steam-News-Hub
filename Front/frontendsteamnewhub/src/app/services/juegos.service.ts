@@ -4,6 +4,7 @@ import { Steam } from '../models/response.interface';
 import { Admin } from '../models/admins.response.interface';
 import { Favoritos } from '../models/favoritos.response.interface';
 import { Usuario } from '../models/usuario.response.interface';
+import { Member } from '../models/usuario.response.interface';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
@@ -83,13 +84,44 @@ public addFavorito(favorito: any): Observable<Favoritos> {
     { headers }
   );
 }
+public deleteUsuario(id: number): Observable<Usuario> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/ld+json',
+    'Accept': 'application/ld+json'
+  });
 
+  return this.http.delete<Usuario>(
+    `http://localhost:8000/api/usuarios/${id}`,
+    { headers }
+  );
+}
 
+editUsuario(id: number, usuario: Partial<Member>): Observable<Member> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/merge-patch+json',
+    'Accept': 'application/ld+json'
+  });
 
+  const userDataToSend = {
+    nombre: usuario.nombre,
+    correo_electronico: usuario.correo_electronico,
+    contraseña: usuario.contraseña
+  };
+
+  return this.http.patch<Member>(
+    `http://localhost:8000/api/usuarios/${id}`,
+    userDataToSend,
+    { headers }
+  );
+}
+public getLikesByUser(userId: number): Observable<Favoritos> {
+  return this.http.get<Favoritos>(
+    `http://localhost:8000/api/favoritos?users.id=${userId}&likes=true`
+  );
+}
 
 
 }
-
 
 
 

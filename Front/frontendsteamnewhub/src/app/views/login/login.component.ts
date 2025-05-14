@@ -40,9 +40,10 @@ export class LoginComponent {
 
         if (usuario) {
           this.authService.login({
+            id: usuario.id,
             nombre: usuario.nombre,
-            email: usuario.correo_electronico 
-}, false);
+            email: usuario.correo_electronico
+        }, false);
           this.router.navigate(['/home']);
         } else {
           alert('Credenciales incorrectas.');

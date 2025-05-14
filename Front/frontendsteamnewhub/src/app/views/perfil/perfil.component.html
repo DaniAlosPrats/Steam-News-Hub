@@ -1,11 +1,39 @@
 <section>
   <div class="container py-5">
     <div class="row justify-content-center">
-      <div class="col-12 col">
-        <p>Nombre: {{ nombre }}</p>
-        <p>Correo: {{ correo }}</p>
-        <button class="btn btn-danger">Borrar cuenta</button>
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="card shadow-sm p-4">
+          <h2 class="mb-4 text-center text-primary">Perfil de Usuario</h2>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Nombre:</label>
+            @if (editar === false) {
+              <p class="form-control-plaintext">{{ nombre }}</p>
+            } @else {
+              <input type="text" class="form-control" [(ngModel)]="nombre" />
+            }
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Correo electrónico:</label>
+            @if (editar === false) {
+              <p class="form-control-plaintext">{{ correo }}</p>
+            } @else {
+              <input type="email" class="form-control" [(ngModel)]="correo" />
+            }
+          </div>
+
+          <div class="d-flex justify-content-between">
+            @if (editar === true) {
+              <button class="btn btn-primary" (click)="editarCuenta()">Guardar cambios</button>
+            } @else {
+               <button class="btn btn-primary" (click)="editarCuenta()">Editar cuenta</button>
+        }
+            <button class="btn btn-danger" (click)="eliminarCuenta()">Eliminar cuenta</button>
+          </div>
+
+        </div>
       </div>
-    </div>  
+    </div>
   </div>
 </section>

@@ -7,6 +7,7 @@ export interface Favoritos {
 }
 
 export interface Member {
+     id:                 number;
     gameId:    string;
     likes:     boolean;
     users:     string;
