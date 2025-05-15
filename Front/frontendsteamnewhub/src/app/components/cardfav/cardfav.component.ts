@@ -33,22 +33,6 @@ toggleFavorite() {
   });
 }
 
- toggleLike() {
-  this.isLiked = !this.isLiked;
-  const likedGames = JSON.parse(localStorage.getItem('likedGames') || '[]');
-  if (this.isLiked) {
-    likedGames.push(this.gameId);
-  } else {
-    const index = likedGames.indexOf(this.gameId);
-    if (index > -1) {
-      likedGames.splice(index, 1);
-    }
-  }
-  localStorage.setItem('likedGames', JSON.stringify(likedGames));
-  this.likeToggled.emit({ 
-    isLiked: this.isLiked,
-     id_juego: this.gameId
-     });
-}
+
  
 }

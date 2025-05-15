@@ -151,27 +151,5 @@ export class ProductsComponent implements OnInit {
 }
 
 
-handleLike(event: { isLiked: boolean, id_juego: number }): void {
-  if (this.isLoggedIn) {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    
-    const iduser = currentUser.id;
-    console.log(iduser);
 
-
-    const likeData = {
-      id_juego: event.id_juego,
-      id_usuario: '/api/usuarios/${iduser}',
-      likes: event.isLiked,
-      favoritos: false 
-    };
-
-    this.favoritoService.addFavorito(likeData).subscribe({
-      next: () => console.log('Agregado a favoritos')
-      
-      
-    });;
-
-  }
-}
 }
