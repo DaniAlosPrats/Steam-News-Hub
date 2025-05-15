@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
 import { RouterModule, Router } from '@angular/router';
-import { JuegosService } from '../../services/juegos.service';
+
 import { AuthService } from '../../services/auth.service';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-login-admin',
@@ -18,9 +19,9 @@ export class LoginAdminComponent {
   password: string = '';
 
   constructor(
-    private juegoService: JuegosService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private adminService: AdminService
   ) {}
 
   onSubmit(): void {
@@ -32,7 +33,7 @@ export class LoginAdminComponent {
       return;
     }
 
-    this.juegoService.getAdmins().subscribe({
+    this.adminService.getAdmins().subscribe({
       next: (response) => {
         const admins = response.member;
         const admin = admins.find((a: any) => a.nombre === username && a.contraseña === password);

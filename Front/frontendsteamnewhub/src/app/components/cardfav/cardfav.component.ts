@@ -27,7 +27,6 @@ export class CardfavComponent {
 
 toggleFavorite() {
   this.isFavorite = !this.isFavorite;
-  console.log('Game ID al hacer click en favorito:', this.gameId);
   this.favoriteToggled.emit({
     isFavorite: this.isFavorite,
     id_juego: this.gameId
@@ -35,8 +34,6 @@ toggleFavorite() {
 }
 
  toggleLike() {
-
-  
   this.isLiked = !this.isLiked;
   const likedGames = JSON.parse(localStorage.getItem('likedGames') || '[]');
   if (this.isLiked) {
@@ -53,5 +50,5 @@ toggleFavorite() {
      id_juego: this.gameId
      });
 }
-
+ 
 }

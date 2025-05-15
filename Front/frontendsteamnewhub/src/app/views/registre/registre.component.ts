@@ -2,7 +2,8 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { JuegosService } from '../../services/juegos.service'; 
+import { AdminService } from '../../services/admin.service';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-registre',
@@ -14,7 +15,8 @@ import { JuegosService } from '../../services/juegos.service';
 export class RegistreComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
-  private apiService = inject(JuegosService);
+  private apiService = inject(UsuarioService);
+  private adminService = inject(AdminService);
   
 signUpForm: FormGroup = this.fb.group({
   nombre: ['', Validators.required],

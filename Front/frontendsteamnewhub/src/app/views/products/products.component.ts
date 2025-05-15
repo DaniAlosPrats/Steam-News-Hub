@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service'; 
 import { CardfavComponent } from '../../components/cardfav/cardfav.component';
+import { Favoritos } from '../../models/favoritos.response.interface';
+import { FavoritoService } from '../../services/favorito.service';
 
 
 @Component({
@@ -35,7 +37,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     public service: JuegosService,
-    public authService: AuthService
+    public authService: AuthService,
+    public favoritoService: FavoritoService
   ) {}
 
   ngOnInit(): void {
@@ -126,39 +129,49 @@ export class ProductsComponent implements OnInit {
   addToFavorites(event: { isFavorite: boolean, id_juego: number }): void {
   if (event.isFavorite && this.isLoggedIn) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const iduser = currentUser.id;
+    console.log(iduser);
 
     const favoritoData = {
       id_juego: event.id_juego,
-      id_usuario: `/api/usuarios/${currentUser.id}`,
+      id_usuario: `/api/usuarios/${iduser}`,
       favoritos: true,
       likes: false
     };
 
-    this.service.addFavorito(favoritoData).subscribe({
+    this.favoritoService.addFavorito(favoritoData).subscribe({
       next: () => console.log('Agregado a favoritos')
     });
+
+     this.favoritoService.deleteFavorito(iduser).subscribe({
+    next: () => console.log('Eliminado de favoritos')
+  });
   } 
+ 
 }
 
 
 handleLike(event: { isLiked: boolean, id_juego: number }): void {
   if (this.isLoggedIn) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    
     const iduser = currentUser.id;
+    console.log(iduser);
 
 
     const likeData = {
       id_juego: event.id_juego,
-      id_usuario: `/api/usuarios/${iduser}`,
+      id_usuario: '/api/usuarios/${iduser}',
       likes: event.isLiked,
       favoritos: false 
     };
 
-    this.service.addFavorito(likeData).subscribe({
+    this.favoritoService.addFavorito(likeData).subscribe({
       next: () => console.log('Agregado a favoritos')
       
       
-    });
+    });;
+
   }
 }
 }

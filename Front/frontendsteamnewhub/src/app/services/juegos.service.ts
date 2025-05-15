@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Steam } from '../models/response.interface'; 
-import { Admin } from '../models/admins.response.interface';
-import { Favoritos } from '../models/favoritos.response.interface';
-import { Usuario } from '../models/usuario.response.interface';
-import { Member } from '../models/usuario.response.interface';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
@@ -29,105 +25,11 @@ public getJuego(number: number): Observable<Steam> {
     `/api/ISteamNews/GetNewsForApp/v0002/?appid=${number}&count=3&maxlength=300&format=json`
   );
 }
-public getAdmins(): Observable<Admin> {
-  return this.http.get<Admin>(
-    'http://localhost:8000/api/admins'
-  );
-}
-public getUsuarios(): Observable<Usuario> {
-  return this.http.get<Usuario>(
-    'http://localhost:8000/api/usuarios'
-  );
-}
-public getFavoritos(): Observable<Favoritos> {
-  return this.http.get<Favoritos>(
-    'http://localhost:8000/api/favoritos'
-  );
-}
 
 
-public postUsuario(usuario: any): Observable<Usuario> {
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/ld+json',
-    'Accept': 'application/ld+json'
-  });
-
-  
-  const userDataToSend: any = {
-    nombre: usuario.member[0].nombre, 
-    correo_electronico: usuario.member[0].correo_electronico,
-    contraseña: usuario.member[0].contraseña,
-  };
-
-  return this.http.post<Usuario>(
-    'http://localhost:8000/api/usuarios', 
-    userDataToSend, 
-    { headers }
-  );
-}
-public addFavorito(favorito: any): Observable<Favoritos> {
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/ld+json',
-    'Accept': 'application/ld+json'
-  });
-
-  const favoritoDataToSend = {
-    gameId: favorito.id_juego.toString(), 
-    likes: favorito.likes || false,
-    favoritos: favorito.favoritos || false,
-    users: favorito.id_usuario
-  };
-
-  return this.http.post<Favoritos>(
-    'http://localhost:8000/api/favoritos',
-    favoritoDataToSend,
-    { headers }
-  );
-}
-public deleteUsuario(id: number): Observable<Usuario> {
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/ld+json',
-    'Accept': 'application/ld+json'
-  });
-
-  return this.http.delete<Usuario>(
-    `http://localhost:8000/api/usuarios/${id}`,
-    { headers }
-  );
-}
-
-editUsuario(id: number, usuario: Partial<Member>): Observable<Member> {
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/merge-patch+json',
-    'Accept': 'application/ld+json'
-  });
-
-  const userDataToSend = {
-    nombre: usuario.nombre,
-    correo_electronico: usuario.correo_electronico,
-    contraseña: usuario.contraseña
-  };
-
-  return this.http.patch<Member>(
-    `http://localhost:8000/api/usuarios/${id}`,
-    userDataToSend,
-    { headers }
-  );
-}
-public getLikesByUser(userId: number): Observable<Favoritos> {
-  return this.http.get<Favoritos>(
-    `http://localhost:8000/api/favoritos?users.id=${userId}&likes=true`
-  );
-}
-
-deleteFavorito(id: number): Observable<any> {
-  return this.http.delete(`/api/favoritos/${id}`);
-}
 
 
 }
-
-
 
  
 

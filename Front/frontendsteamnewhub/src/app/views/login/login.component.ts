@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { JuegosService } from '../../services/juegos.service';
+
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service'; 
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
+import { UsuarioService } from '../../services/usuario.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -19,7 +19,7 @@ export class LoginComponent {
   registed: boolean = false;
 
   constructor(
-    private juegoService: JuegosService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private authService: AuthService
   ) {}
@@ -33,7 +33,7 @@ export class LoginComponent {
       return;
     }
 
-    this.juegoService.getUsuarios().subscribe({
+    this.usuarioService.getUsuarios().subscribe({
       next: (response) => {
         const usuarios = response.member;
         const usuario = usuarios.find((u: any) => u.nombre === username && u.contraseña === password);

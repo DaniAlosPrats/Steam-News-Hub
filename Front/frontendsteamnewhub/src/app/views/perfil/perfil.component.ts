@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { JuegosService } from '../../services/juegos.service';
 import { FormsModule } from '@angular/forms';
+import { UsuarioService } from '../../services/usuario.service';
 
 
 
@@ -21,7 +22,7 @@ export class PerfilComponent {
 
 
   constructor(
-    private juegosService: JuegosService,
+    private usuarioService: UsuarioService,
     private authService: AuthService
   ) {}
 
@@ -30,7 +31,7 @@ export class PerfilComponent {
     this.nombre = currentUser.nombre;
 
   
-    this.juegosService.getUsuarios().subscribe({
+    this.usuarioService.getUsuarios().subscribe({
       next: (data) => {
         const usuarios = data.member;
         const usuario = usuarios.find((u: any) => u.nombre === this.nombre);
@@ -51,7 +52,7 @@ export class PerfilComponent {
 
     
 
-    this.juegosService.deleteUsuario(iduser).subscribe({
+    this.usuarioService.deleteUsuario(iduser).subscribe({
       next: (response) => {
         console.log('Cuenta eliminada:', response);
         this.authService.logout();
@@ -81,7 +82,7 @@ export class PerfilComponent {
     contraseña: currentUser.contraseña
   };
 
-  this.juegosService.editUsuario(iduser, updatedUser).subscribe({
+  this.usuarioService.editUsuario(iduser, updatedUser).subscribe({
     next: (response) => {
       console.log('Cuenta actualizada:', response);
     
