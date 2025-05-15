@@ -77,7 +77,7 @@ export class ProductsComponent implements OnInit {
         this.description6 = response.appnews.newsitems[2].contents;
 
         this.products = response.appnews.newsitems;
-        this.filteredProducts = [...this.products]; 
+        this.filteredProducts =  this.products.slice();
       }
     });
   }
@@ -85,7 +85,7 @@ export class ProductsComponent implements OnInit {
   volver(): void {
     this.hasSearched = false;
     this.appidInput = null;
-    this.filteredProducts = [...this.products];
+    this.filteredProducts =  this.products.slice();;
   }
 
   buscarJuego(): void {
@@ -105,13 +105,13 @@ export class ProductsComponent implements OnInit {
       this.products = [];
     }
 
-    this.filteredProducts = [...this.products];
+    this.filteredProducts =  this.products.slice();;
     this.photo = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' + this.appidInput + '/header.jpg';
   },
   error: () => {
     this.products = [];
     this.filteredProducts = [];
-    this.errorMessage = 'Error al obtener datos de la API.';
+    
   }
 });
   }

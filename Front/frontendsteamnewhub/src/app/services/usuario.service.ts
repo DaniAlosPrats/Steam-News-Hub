@@ -17,6 +17,17 @@ export class UsuarioService {
       'http://localhost:8000/api/usuarios'
     );
   }
+  getAllUsuarios(): Observable<Usuario[]> {
+  return this.http.get<Usuario[]>('http://localhost:8000/api/usuarios');
+}
+
+  public getUsuarioById(id: number ) {
+    return this.http.get<any>(
+       `http://localhost:8000/api/usuarios/${id}`
+    );
+  }
+
+
   public postUsuario(usuario: any): Observable<Usuario> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/ld+json',
@@ -67,4 +78,18 @@ export class UsuarioService {
       { headers }
     );
   }
+
+ editUsuarioById(id: number, userDataToSend: any): Observable<Usuario> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/merge-patch+json',
+    'Accept': 'application/ld+json'
+  });
+
+  return this.http.patch<Usuario>(
+    `http://localhost:8000/api/usuarios/${id}`,
+    userDataToSend,
+    { headers }
+  );
+}
+
 }

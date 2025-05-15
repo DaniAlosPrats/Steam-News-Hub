@@ -14,4 +14,12 @@ export class AdminService {
       'http://localhost:8000/api/admins'
     );
   }
+
+
+  getAdminById(id: number) {
+  return this.http.get<any>(
+    `http://localhost:8000/api/admins/${id}`
+  );
+}
+
 }
