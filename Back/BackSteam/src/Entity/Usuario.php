@@ -21,7 +21,7 @@ class Usuario
     private ?string $nombre = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $contrseña = null;
+    private ?string $contraseña = null;
 
     #[ORM\Column(length: 255)]
     private ?string $correo_electronico = null;
@@ -30,6 +30,7 @@ class Usuario
      * @var Collection<int, Favoritos>
      */
     #[ORM\OneToMany(targetEntity: Favoritos::class, mappedBy: 'users')]
+
     private Collection $favoritos;
 
     public function __construct()
@@ -61,14 +62,14 @@ class Usuario
         return $this;
     }
 
-    public function getContrseña(): ?string
+    public function getContraseña(): ?string
     {
-        return $this->contrseña;
+        return $this->contraseña;
     }
 
-    public function setContrseña(string $contrseña): static
+    public function setContraseña(string $contraseña): static
     {
-        $this->contrseña = $contrseña;
+        $this->contraseña = $contraseña;
 
         return $this;
     }

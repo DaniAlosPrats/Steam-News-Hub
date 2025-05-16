@@ -22,6 +22,7 @@ class Favoritos
     private ?bool $likes = null;
 
     #[ORM\ManyToOne(inversedBy: 'favoritos')]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?Usuario $users = null;
 
     #[ORM\Column]

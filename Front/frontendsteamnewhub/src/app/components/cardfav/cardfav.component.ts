@@ -18,11 +18,8 @@ export class CardfavComponent {
   @Output() favoriteToggled = new EventEmitter<any>();
 
    isFavorite: boolean = false;
-  isLiked: boolean = false;
-   ngOnInit(): void {
-    const likedGames = JSON.parse(localStorage.getItem('likedGames') || '[]');
-    this.isLiked = likedGames.includes(this.gameId);
-  }
+  
+  
 
 
 toggleFavorite() {
