@@ -3,7 +3,7 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - main  # O tu rama principal
+      - main  # Cambia por tu rama principal
 
 jobs:
   deploy:
@@ -25,9 +25,20 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            cd /home/ec2-user/BackSteam  # Cambia al path correcto
-            git pull origin main
-            docker-compose down
-            docker-compose up -d --build
+          ssh -t ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            # Si no existe la carpeta, clonamos el repo con sudo (por /var/www)
+            if [ ! -d /var/www/Steam-News-Hub ]; then
+              sudo git clone https://github.com/tu-usuario/tu-repo.git /var/www/Steam-News-Hub
+              sudo chown -R $USER:$USER /var/www/Steam-News-Hub
+            else
+              cd /var/www/Steam-News-Hub
+              sudo git pull origin main
+            fi
+
+            # Entramos al directorio
+            cd /var/www/Steam-News-Hub
+
+            # Bajamos y levantamos los contenedores docker
+            sudo docker-compose down || true
+            sudo docker-compose up -d --build
           EOF
