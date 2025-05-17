@@ -14,7 +14,7 @@ import { UsuarioService } from '../../services/usuario.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  username: string = '';
+  nombre: string = '';
   password: string = '';
   registed: boolean = false;
 
@@ -25,10 +25,10 @@ export class LoginComponent {
   ) {}
 
   onSubmit(): void {
-    const username = this.username.trim();
+    const nombre = this.nombre.trim();
     const password = this.password.trim();
 
-    if (!username || !password) {
+    if (!nombre || !password) {
       alert('Por favor, completa todos los campos.');
       return;
     }
@@ -36,13 +36,13 @@ export class LoginComponent {
     this.usuarioService.getUsuarios().subscribe({
       next: (response) => {
         const usuarios = response.member;
-        const usuario = usuarios.find((u: any) => u.nombre === username && u.contraseña === password);
+        const usuario = usuarios.find((u: any) => u.nombre === nombre && u.contraseña === password);
 
         if (usuario) {
           this.authService.login({
             id: usuario.id,
             nombre: usuario.nombre,
-            email: usuario.correo_electronico
+            email: usuario.correoElectronico
         }, false);
           this.router.navigate(['/home']);
         } else {

@@ -68,7 +68,7 @@ export class PerfilComponent {
     } else {
       this.usuarioService.getUsuarioById(id).subscribe({
         next: (usuario) => {
-          this.correo = usuario.correo_electronico;
+          this.correo = usuario.correoElectronico;
         },
         error: (err) => {
           console.error('Error al obtener datos del usuario:', err);
@@ -93,7 +93,7 @@ export class PerfilComponent {
 
       const updatedUser = {
         nombre: usuario.nombre,
-        correo_electronico: usuario.correo_electronico,
+        correoElectronico: usuario.correoElectronico,
         contraseña: usuario.contraseña
       };
 

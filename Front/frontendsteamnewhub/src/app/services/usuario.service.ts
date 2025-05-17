@@ -68,7 +68,7 @@ export class UsuarioService {
   
     const userDataToSend = {
       nombre: usuario.nombre,
-      correo_electronico: usuario.correo_electronico,
+      correo_electronico: usuario.correoElectronico,
       contraseña: usuario.contraseña
     };
   

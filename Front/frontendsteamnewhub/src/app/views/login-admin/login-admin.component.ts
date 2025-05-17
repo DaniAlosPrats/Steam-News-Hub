@@ -15,7 +15,7 @@ import { AdminService } from '../../services/admin.service';
 
 
 export class LoginAdminComponent {
-  username: string = '';
+  nombre: string = '';
   password: string = '';
 
   constructor(
@@ -25,10 +25,10 @@ export class LoginAdminComponent {
   ) {}
 
   onSubmit(): void {
-    const username = this.username.trim();
+    const nombre = this.nombre.trim();
     const password = this.password.trim();
 
-    if (!username || !password) {
+    if (!nombre || !password) {
       alert('Por favor, completa todos los campos.');
       return;
     }
@@ -36,7 +36,7 @@ export class LoginAdminComponent {
     this.adminService.getAdmins().subscribe({
       next: (response) => {
         const admins = response.member;
-        const admin = admins.find((a: any) => a.nombre === username && a.contraseña === password);
+        const admin = admins.find((a: any) => a.nombre === nombre && a.contraseña === password);
 
         if (admin) {
           this.authService.login(admin, true);

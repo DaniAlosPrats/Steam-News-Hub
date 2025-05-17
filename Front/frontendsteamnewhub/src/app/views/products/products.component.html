@@ -6,12 +6,7 @@
       <h2>Buscar noticias por AppID</h2>
 
       <form (ngSubmit)="buscarJuego()">
-        <input
-          type="text"
-          [(ngModel)]="appidInput"
-          name="nombreJuego"
-          placeholder="Introduce el nombre del juego"
-          required />
+        <input type="text" [(ngModel)]="appidInput" name="nombreJuego" placeholder="Introduce el nombre del juego" required />
         <button type="submit">Buscar</button>
       </form>
       <button type="button" (click)="volver()">Volver</button>
