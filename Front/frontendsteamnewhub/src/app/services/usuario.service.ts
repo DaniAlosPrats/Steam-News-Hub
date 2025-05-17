@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario.response.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Member } from '../models/usuario.response.interface';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -17,9 +18,11 @@ export class UsuarioService {
       'http://localhost:8000/api/usuarios'
     );
   }
-  getAllUsuarios(): Observable<Usuario[]> {
-  return this.http.get<Usuario[]>('http://localhost:8000/api/usuarios');
+ getAllUsuarios(): Observable<Member[]> {
+  return this.http.get<Usuario>('http://localhost:8000/api/usuarios')
+    .pipe(map((response: Usuario) => response.member));
 }
+
 
   public getUsuarioById(id: number ) {
     return this.http.get<any>(
@@ -37,7 +40,7 @@ export class UsuarioService {
     
     const userDataToSend: any = {
       nombre: usuario.member[0].nombre, 
-      correo_electronico: usuario.member[0].correo_electronico,
+      correoElectronico: usuario.member[0].correoElectronico,
       contraseña: usuario.member[0].contraseña,
     };
   
@@ -68,7 +71,7 @@ export class UsuarioService {
   
     const userDataToSend = {
       nombre: usuario.nombre,
-      correo_electronico: usuario.correoElectronico,
+      correoElectronico: usuario.correoElectronico,
       contraseña: usuario.contraseña
     };
   

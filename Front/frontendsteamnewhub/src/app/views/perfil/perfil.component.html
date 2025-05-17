@@ -68,9 +68,9 @@
                 <div style="color: #fff;">
                   @if (usuarioEditandoId === usuario.id) {
                   <input type="text" class="form-control mb-1" [(ngModel)]="usuario.nombre" />
-                  <input type="email" class="form-control mb-1" [(ngModel)]="usuario.correo_electronico" />
+                  <input type="email" class="form-control mb-1" [(ngModel)]="usuario.correoElectronico" />
                   } @else {
-                  {{ usuario.nombre }} -- {{ usuario.correo_electronico }}
+                  {{ usuario.nombre }} -- {{ usuario.correoElectronico }}
                   }
                 </div>
                 <div class="d-flex gap-2">

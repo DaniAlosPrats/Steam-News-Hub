@@ -43,7 +43,7 @@ export class PerfilComponent {
     if (this.esAdmin) {
       this.adminService.getAdminById(id).subscribe({
         next: (admin) => {
-          this.correo = admin.correo_electronico;
+          this.correo = admin.correoElectronico;
         },
         error: (err) => {
           console.error('Error al obtener datos del admin:', err);
@@ -146,7 +146,7 @@ export class PerfilComponent {
 
     const updatedUser = {
       nombre: this.nombre,
-      correo_electronico: this.correo,
+      correoElectronico: this.correo,
       contraseña: currentUser.contraseña
     };
 
@@ -157,7 +157,7 @@ export class PerfilComponent {
         const updatedUserInfo = {
           ...currentUser,
           nombre: this.nombre,
-          correo_electronico: this.correo
+          correoElectronico: this.correo
         };
 
         localStorage.setItem('currentUser', JSON.stringify(updatedUserInfo));
