@@ -1,44 +1,99 @@
-name: Deploy to EC2
+name: Deploy Steam-News-Hub Symfony API with MySQL and Nginx
 
 on:
   push:
     branches:
-      - main  # Cambia por tu rama principal
+      - main  # Cambia a la rama que uses para despliegue
 
 jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Login en Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Construir y subir imagen Symfony
+      - name: Build y push imagen Symfony
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/steamnews-symfony:latest -f backend/Docker/php.Dockerfile backend/
+          docker push ${{ secrets.DOCKER_USERNAME }}/steamnews-symfony:latest
+
+      # Construir y subir imagen Nginx
+      - name: Build y push imagen Nginx
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/steamnews-nginx:latest -f backend/Docker/nginx.Dockerfile backend/
+          docker push ${{ secrets.DOCKER_USERNAME }}/steamnews-nginx:latest
+
   deploy:
     runs-on: ubuntu-latest
-
+    needs: build-and-push
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout código
+        uses: actions/checkout@v4
+        with:
+          ref: main
 
-      - name: Setup SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+      - name: Transferir docker-compose.yml al servidor
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: back/compose.yml   # Cambia si tu docker-compose.yml está en otra ruta
+          target: /home/${{ secrets.EC2_USER }}/deploy/
 
-      - name: Add EC2 to known hosts
-        run: |
-          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+      - name: Desplegar en servidor remoto
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo chmod 666 /var/run/docker.sock
+            echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
-      - name: Deploy to EC2
-        run: |
-          ssh -t ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            # Si no existe la carpeta, clonamos el repo con sudo (por /var/www)
-            if [ ! -d /var/www/Steam-News-Hub ]; then
-              sudo git clone https://github.com/tu-usuario/tu-repo.git /var/www/Steam-News-Hub
-              sudo chown -R $USER:$USER /var/www/Steam-News-Hub
-            else
-              cd /var/www/Steam-News-Hub
-              sudo git pull origin main
-            fi
+            docker-compose -f /home/${{ secrets.EC2_USER }}/deploy/compose.yml pull
+            docker-compose -f /home/${{ secrets.EC2_USER }}/deploy/compose.yml down
+            docker-compose -f /home/${{ secrets.EC2_USER }}/deploy/compose.yml up -d --force-recreate
 
-            # Entramos al directorio
-            cd /var/www/Steam-News-Hub
+      - name: Configurar variables .env en el contenedor Symfony
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker exec steamnews_symfony_app sh -c 'echo "APP_ENV=prod" > /var/www/html/.env'
+            docker exec steamnews_symfony_app sh -c 'echo "APP_DEBUG=0" >> /var/www/html/.env'
+            docker exec steamnews_symfony_app sh -c 'echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> /var/www/html/.env'
+            docker exec steamnews_symfony_app sh -c 'echo "CORS_ALLOW_ORIGIN=*" >> /var/www/html/.env'
+            docker exec steamnews_symfony_app sh -c 'echo "MAILER_DSN=null://null" >> /var/www/html/.env'
+            docker exec steamnews_symfony_app sh -c 'echo "MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0" >> /var/www/html/.env'
 
-            # Bajamos y levantamos los contenedores docker
-            sudo docker-compose down || true
-            sudo docker-compose up -d --build
-          EOF
+      - name: Ejecutar post-install-cmd y limpiar cache
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker exec steamnews_symfony_app composer run-script post-install-cmd
+            docker exec steamnews_symfony_app php bin/console cache:clear --env=prod
+
+      - name: Mostrar última migración
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            latest_migration=$(docker exec steamnews_symfony_app ls -t /var/www/html/migrations | head -n 1)
+            docker exec steamnews_symfony_app cat /var/www/html/migrations/$latest_migration
