@@ -42,7 +42,7 @@ export class LoginComponent {
           this.authService.login({
             id: usuario.id,
             nombre: usuario.nombre,
-            email: usuario.correoElectronico
+            correo: usuario.correoElectronico
         }, false);
           this.router.navigate(['/home']);
         } else {

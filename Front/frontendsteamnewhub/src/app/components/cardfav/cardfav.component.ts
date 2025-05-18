@@ -8,9 +8,9 @@ import { NgStyle } from '@angular/common';
   styleUrl: './cardfav.component.css'
 })
 export class CardfavComponent {
- @Input() title: string = 'My Title';
-  @Input() description: string = 'My Text';
-  @Input() photo: string = 'url(https://www.lavanguardia.com/files/og_thumbnail/uploads/2021/03/05/60421be64918d.jpeg)';
+ @Input() titulo: string = 'My Title';
+  @Input() descripcion: string = 'My Text';
+  @Input() foto: string = 'url(https://www.lavanguardia.com/files/og_thumbnail/uploads/2021/03/05/60421be64918d.jpeg)';
 
      
   @Output() likeToggled = new EventEmitter<any>();

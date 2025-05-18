@@ -11,9 +11,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  isAdmin: boolean = false;
+  esAdmin: boolean = false;
   isLoggedIn: boolean = false;
-  username: string | null = null;
+  nombre: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {
     
@@ -23,13 +23,13 @@ export class HeaderComponent {
 });
 
 this.authService.currentUser$.subscribe(user => {
-  this.username = user?.nombre || null;
+  this.nombre = user?.nombre || null;
  
 });
 
     
     this.authService.isAdmin$.subscribe(value => {
-      this.isAdmin = value;
+      this.esAdmin = value;
      
     });
   }

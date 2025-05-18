@@ -18,22 +18,22 @@ import { FavoritoService } from '../../services/favorito.service';
 })
 export class ProductsComponent implements OnInit {
   appidInput: number | null = null;
-  products: any[] = [];
-  filteredProducts: any[] = [];
+  productos: any[] = [];
+  productosFiltrados: any[] = [];
   searchTerm: string = '';
   errorMessage: string = '';
-  hasSearched: boolean = false;
+  Buscado: boolean = false;
   Back: boolean = false;
   isLoggedIn: boolean = false;
 
   photo: string = '';
 
-  title1 = ''; description1 = '';
-  title2 = ''; description2 = '';
-  title3 = ''; description3 = '';
-  title4 = ''; description4 = '';
-  title5 = ''; description5 = '';
-  title6 = ''; description6 = '';
+  titulo1 = ''; descripcion1 = '';
+  titulo2 = ''; descripcion2 = '';
+  titulo3 = ''; descripcion3 = '';
+  titulo4 = ''; descripcion4 = '';
+  titulo5 = ''; descripcion5 = '';
+  titulo6 = ''; descripcion6 = '';
 
   constructor(
     public service: JuegosService,
@@ -53,15 +53,15 @@ export class ProductsComponent implements OnInit {
   public getResponse(): void {
     this.service.getResponse().subscribe({
       next: (response) => {
-        this.title1 = response.appnews.newsitems[0].title;
-        this.description1 = response.appnews.newsitems[0].contents;
-        this.title2 = response.appnews.newsitems[1].title;
-        this.description2 = response.appnews.newsitems[1].contents;
-        this.title3 = response.appnews.newsitems[2].title;
-        this.description3 = response.appnews.newsitems[2].contents;
+        this.titulo1 = response.appnews.newsitems[0].title;
+        this.descripcion1 = response.appnews.newsitems[0].contents;
+        this.titulo2 = response.appnews.newsitems[1].title;
+        this.descripcion2 = response.appnews.newsitems[1].contents;
+        this.titulo3 = response.appnews.newsitems[2].title;
+        this.descripcion3 = response.appnews.newsitems[2].contents;
 
-        this.products = response.appnews.newsitems;
-        this.filteredProducts = [...this.products]; 
+        this.productos = response.appnews.newsitems;
+        this.productosFiltrados =  this.productos.slice();
       }
     });
   }
@@ -69,23 +69,23 @@ export class ProductsComponent implements OnInit {
   public getResponse2(): void {
     this.service.getResponse2().subscribe({
       next: (response) => { 
-        this.title4 = response.appnews.newsitems[0].title;   
-        this.description4 = response.appnews.newsitems[0].contents;
-        this.title5 = response.appnews.newsitems[1].title;
-        this.description5 = response.appnews.newsitems[1].contents;
-        this.title6 = response.appnews.newsitems[2].title;
-        this.description6 = response.appnews.newsitems[2].contents;
+        this.titulo4 = response.appnews.newsitems[0].title;   
+        this.descripcion4 = response.appnews.newsitems[0].contents;
+        this.titulo5 = response.appnews.newsitems[1].title;
+        this.descripcion5 = response.appnews.newsitems[1].contents;
+        this.titulo6 = response.appnews.newsitems[2].title;
+        this.descripcion6 = response.appnews.newsitems[2].contents;
 
-        this.products = response.appnews.newsitems;
-        this.filteredProducts =  this.products.slice();
+        this.productos = response.appnews.newsitems;
+        this.productosFiltrados =  this.productos.slice();
       }
     });
   }
 
   volver(): void {
-    this.hasSearched = false;
+    this.Buscado = false;
     this.appidInput = null;
-    this.filteredProducts =  this.products.slice();;
+    this.productosFiltrados =  this.productos.slice();;
   }
 
   buscarJuego(): void {
@@ -95,22 +95,22 @@ export class ProductsComponent implements OnInit {
     }
 
     this.errorMessage = '';
-    this.hasSearched = true;
+    this.Buscado = true;
 
     this.service.getJuego(this.appidInput).subscribe({
   next: (response) => {
     if (response.appnews && response.appnews.newsitems) {
-      this.products = response.appnews.newsitems;
+      this.productos = response.appnews.newsitems;
     } else {
-      this.products = [];
+      this.productos = [];
     }
 
-    this.filteredProducts =  this.products.slice();;
+    this.productosFiltrados =  this.productos.slice();;
     this.photo = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' + this.appidInput + '/header.jpg';
   },
   error: () => {
-    this.products = [];
-    this.filteredProducts = [];
+    this.productos = [];
+    this.productosFiltrados = [];
     
   }
 });
@@ -119,9 +119,9 @@ export class ProductsComponent implements OnInit {
   searchProducts(): void {
   const term = this.searchTerm.trim().toLowerCase();
 
-  this.filteredProducts = this.products.filter(product =>
+  this.productosFiltrados = this.productos.filter(product =>
     !term ||
-    product.title?.toLowerCase().includes(term) ||
+    product.titulo?.toLowerCase().includes(term) ||
     product.contents?.toLowerCase().includes(term)
   );
 }
@@ -142,7 +142,7 @@ export class ProductsComponent implements OnInit {
     this.favoritoService.getFavoritos().subscribe((data) => {
       const favoritoExistente = data.member.find((f: any) =>
         f.gameId === event.id_juego.toString() &&
-        f.users === `/api/usuarios/${iduser}`
+        f.usuarios === `/api/usuarios/${iduser}`
       );
 
       

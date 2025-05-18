@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario.service';
@@ -27,6 +28,7 @@ export class PerfilComponent {
 
 
   constructor(
+    private router: Router,
     private usuarioService: UsuarioService,
     private authService: AuthService,
     private adminService: AdminService
@@ -122,6 +124,7 @@ export class PerfilComponent {
       next: (response) => {
 
         this.authService.logout();
+        this.router.navigate(['/home']);
 
       },
       error: (error) => {

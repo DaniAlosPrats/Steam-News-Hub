@@ -14,15 +14,15 @@
 
    
     @if(isLoggedIn === false) {
-      @if (hasSearched === true) {
+      @if (Buscado === true) {
         <section class="card-container">
           <div class="row g-3">
-            @for (product of filteredProducts; track product.title) {
+            @for (product of productosFiltrados; track product.title) {
               <article class="col-md-3 mb-3">
                 <app-card-products 
-                  [title]="product.title"
-                  [description]="product.contents"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/' + appidInput + '/header.jpg)'">
+                  [titulo]="product.title"
+                  [descripcion]="product.contents"
+                  [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/' + appidInput + '/header.jpg)'">
                 </app-card-products>
               </article>
             }
@@ -30,7 +30,7 @@
         </section>
       }
 
-      @if (hasSearched === false) {
+      @if (Buscado === false) {
         <section>
           <h2>Juegos Más Buscados</h2>
 
@@ -38,24 +38,24 @@
             <div class="row g-3">
               <article class="col-md-3 mb-3">
                 <app-card-products
-                  [title]="title1"
-                  [description]="description1"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'">
+                  [titulo]="titulo1"
+                  [descripcion]="descripcion1"
+                  [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'">
                   
                 </app-card-products>
               </article>
               <article class="col-md-3 mb-3">
                 <app-card-products
-                  [title]="title2"
-                  [description]="description2"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'">
+                  [titulo]="titulo2"
+                  [descripcion]="descripcion2"
+                  [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'">
                 </app-card-products>
               </article>
               <article class="col-md-3 mb-3">
                 <app-card-products
-                  [title]="title3"
-                  [description]="description3"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'">
+                  [titulo]="titulo3"
+                  [descripcion]="descripcion3"
+                  [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'">
                 </app-card-products>
               </article>
             </div>
@@ -65,23 +65,23 @@
             <div class="row g-3">
               <article class="col-md-3 mb-3">
                 <app-card-products
-                  [title]="title4"
-                  [description]="description4"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'">
+                  [titulo]="titulo4"
+                  [descripcion]="descripcion4"
+                  [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'">
                 </app-card-products>
               </article>
               <article class="col-md-3 mb-3">
                 <app-card-products
-                  [title]="title5"
-                  [description]="description5"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'">
+                  [titulo]="titulo5"
+                  [descripcion]="descripcion5"
+                  [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'">
                 </app-card-products>
               </article>
               <article class="col-md-3 mb-3">
                 <app-card-products
-                  [title]="title6"
-                  [description]="description6"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'">
+                  [titulo]="titulo6"
+                  [descripcion]="descripcion6"
+                  [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'">
                 </app-card-products>
               </article>
             </div>
@@ -92,15 +92,15 @@
 
     
     @if(isLoggedIn === true) {
-      @if (hasSearched === true) {
+      @if (Buscado === true) {
         <section class="card-container">
           <div class="row g-3">
-            @for (product of filteredProducts; track product.title) {
+            @for (product of productosFiltrados; track product.title) {
               <article class="col-md-3 mb-3">
                 <app-cardfav 
-                  [title]="product.title"
-                  [description]="product.contents"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/' + appidInput + '/header.jpg)'"
+                  [titulo]="product.title"
+                  [descripcion]="product.contents"
+                  [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/' + appidInput + '/header.jpg)'"
                   [gameId]="appidInput"
                  (favoriteToggled)="addToFavorites($event)"
                  >
@@ -111,7 +111,7 @@
         </section>
       }
 
-      @if (hasSearched === false) {
+      @if (Buscado === false) {
         <section>
           <h2>Juegos Más Buscados</h2>
 
@@ -119,9 +119,9 @@
             <div class="row g-3">
               <article class="col-md-3 mb-3">
                 <app-cardfav
-                  [title]="title1"
-                  [description]="description1"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'"
+                  [titulo]="titulo1"
+                  [descripcion]="descripcion1"
+                  [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'"
                   [gameId]="420"
                  (favoriteToggled)="addToFavorites($event)"
                  >
@@ -129,9 +129,9 @@
               </article>
               <article class="col-md-3 mb-3">
                 <app-cardfav
-                  [title]="title2"
-                  [description]="description2"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'"
+                  [titulo]="titulo2"
+                  [descripcion]="descripcion2"
+                  [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'"
                   [gameId]="420"
                  (favoriteToggled)="addToFavorites($event)"
                 >
@@ -139,9 +139,9 @@
               </article>
               <article class="col-md-3 mb-3">
                 <app-cardfav
-                  [title]="title3"
-                  [description]="description3"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'"
+                  [titulo]="titulo3"
+                  [descripcion]="descripcion3"
+                  [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'"
                   [gameId]="420"
                  (favoriteToggled)="addToFavorites($event)"
                  >
@@ -154,9 +154,9 @@
             <div class="row g-3">
               <article class="col-md-3 mb-3">
                <app-cardfav
-                 [title]="title1"
-                [description]="description1"
-                 [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'"
+                 [titulo]="titulo1"
+                [descripcion]="descripcion1"
+                 [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'"
                  [gameId]="440"
                  (favoriteToggled)="addToFavorites($event)"
                  >
@@ -164,9 +164,9 @@
               </article>
               <article class="col-md-3 mb-3">
                 <app-cardfav
-                  [title]="title5"
-                  [description]="description5"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'"
+                  [titulo]="titulo5"
+                  [descripcion]="descripcion5"
+                  [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'"
                   [gameId]="440"
                  (favoriteToggled)="addToFavorites($event)"
                  >
@@ -174,9 +174,9 @@
               </article>
               <article class="col-md-3 mb-3">
                 <app-cardfav
-                  [title]="title6"
-                  [description]="description6"
-                  [photo]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'"
+                  [titulo]="titulo6"
+                  [descripcion]="descripcion6"
+                  [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'"
                   [gameId]="440"
                  (favoriteToggled)="addToFavorites($event)"
                 >
@@ -188,7 +188,7 @@
       }
     }
 
-    @if (hasSearched && filteredProducts.length === 0) {
+    @if (Buscado && productosFiltrados.length === 0) {
       <div class="no-info">
         No hay información disponible para este Juego.
       </div>
