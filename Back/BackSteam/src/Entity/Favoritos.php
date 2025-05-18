@@ -18,8 +18,7 @@ class Favoritos
     #[ORM\Column(length: 100)]
     private ?string $gameId = null;
 
-    #[ORM\Column]
-    private ?bool $likes = null;
+
 
     #[ORM\ManyToOne(inversedBy: 'favoritos')]
     #[ORM\JoinColumn(onDelete: "CASCADE")]
@@ -52,17 +51,7 @@ class Favoritos
         return $this;
     }
 
-    public function isLikes(): ?bool
-    {
-        return $this->likes;
-    }
 
-    public function setLikes(bool $likes): static
-    {
-        $this->likes = $likes;
-
-        return $this;
-    }
 
     public function getUsers(): ?Usuario
     {

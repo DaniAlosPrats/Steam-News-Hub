@@ -24,7 +24,7 @@ class Usuario
     private ?string $contraseña = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $correo_electronico = null;
+    private ?string $correoElectronico = null;
 
     /**
      * @var Collection<int, Favoritos>
@@ -76,12 +76,12 @@ class Usuario
 
     public function getCorreoElectronico(): ?string
     {
-        return $this->correo_electronico;
+        return $this->correoElectronico;
     }
 
     public function setCorreoElectronico(string $correo_electronico): static
     {
-        $this->correo_electronico = $correo_electronico;
+        $this->correoElectronico = $correo_electronico;
 
         return $this;
     }
