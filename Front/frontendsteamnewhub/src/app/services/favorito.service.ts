@@ -43,8 +43,8 @@ public getAllFavoritos(): Observable<Favoritos[]> {
     );
   }
 
-  deleteFavorito(id_usuario: string): Observable<any> {
-  return this.http.delete(`http://localhost:8000/api/favoritos/${id_usuario}`);
+  deleteFavorito(id: number): Observable<any> {
+  return this.http.delete(`http://localhost:8000/api/favoritos/${id}`);
 }
 
 updateFavorito(favoritoId: number, favorito: Partial<Member>): Observable<Member> {

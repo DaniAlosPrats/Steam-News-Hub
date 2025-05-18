@@ -31,7 +31,7 @@ signUpForm: FormGroup = this.fb.group({
       member: [
         {
           nombre: formValue.nombre,
-          correo_electronico: formValue.email,
+          correoElectronico: formValue.email,
           contraseña: formValue.password
         }
       ]

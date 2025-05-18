@@ -89,28 +89,26 @@ export class PerfilComponent {
     });
   }
   public editarUsuario(usuario: any): void {
-    if (this.usuarioEditandoId === usuario.id) {
+  if (this.usuarioEditandoId === usuario.id) {
+    const updatedUser: any = {
+      nombre: usuario.nombre,
+      correoElectronico: usuario.correoElectronico
+    };
 
-      const updatedUser = {
-        nombre: usuario.nombre,
-        correoElectronico: usuario.correoElectronico,
-        contraseña: usuario.contraseña
-      };
 
-      this.usuarioService.editUsuarioById(usuario.id, updatedUser).subscribe({
-        next: () => {
-          this.usuarioEditandoId = null;
-        },
-        error: (err) => {
-          console.error('Error al actualizar usuario:', err);
-
-        }
-      });
-    } else {
-
-      this.usuarioEditandoId = usuario.id;
-    }
+    this.usuarioService.editUsuarioById(usuario.id, updatedUser).subscribe({
+      next: () => {
+        this.usuarioEditandoId = null;
+      },
+      error: (err) => {
+        console.error('Error al actualizar usuario:', err);
+        alert(`Error al actualizar usuario: ${err.message}`);
+      }
+    });
+  } else {
+    this.usuarioEditandoId = usuario.id;
   }
+}
 
 
 

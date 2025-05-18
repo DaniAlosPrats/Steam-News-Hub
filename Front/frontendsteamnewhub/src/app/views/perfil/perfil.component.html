@@ -1,5 +1,6 @@
 @if (esAdmin === false){
 <section>
+  <article>
   <div class="container py-5">
     <div class="row justify-content-center">
       <div class="col-12 col-md-8 col-lg-6">
@@ -37,16 +38,18 @@
       </div>
     </div>
   </div>
+  </article>
 </section>
 }
 
-@if (esAdmin === true){
+@if (esAdmin) {
 <section>
+  <article>
   <div class="container py-5">
     <div class="row justify-content-center">
       <div class="col-12 col-md-8 col-lg-6">
         <div class="card shadow-sm p-4" style="background-color: #171a21;">
-          <h2 class="mb-4 text-center text-primary" style="color: #66c0f4;">Perfil de Usuario</h2>
+          <h2 class="mb-4 text-center text-primary" style="color: #66c0f4;">Perfil de Administrador</h2>
 
           <div class="row mb-3">
             <div class="col">
@@ -61,30 +64,30 @@
 
           <div class="row mb-3">
             <label class="form-label fw-bold" style="color: #fff;">Usuarios:</label>
-            <ul>
-
+            <ul class="list-unstyled">
               @for (usuario of usuarios; track usuario.id) {
-              <div class="d-flex justify-content-between align-items-center border-bottom mb-2">
-                <div style="color: #fff;">
-                  @if (usuarioEditandoId === usuario.id) {
-                  <input type="text" class="form-control mb-1" [(ngModel)]="usuario.nombre" />
-                  <input type="email" class="form-control mb-1" [(ngModel)]="usuario.correoElectronico" />
-                  } @else {
-                  {{ usuario.nombre }} -- {{ usuario.correoElectronico }}
-                  }
+              <li class="mb-2 border-bottom pb-2">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="flex-grow-1 me-2" style="color: #fff;">
+                    @if (usuarioEditandoId === usuario.id) {
+                    <input type="text" class="form-control mb-1" [(ngModel)]="usuario.nombre" />
+                    <input type="email" class="form-control mb-1" [(ngModel)]="usuario.correoElectronico" />
+                    } @else {
+                    {{ usuario.nombre }} -- {{ usuario.correoElectronico }}
+                    }
+                  </div>
+                  <div class="d-flex gap-2">
+                    @if (usuarioEditandoId === usuario.id) {
+                    <button class="btn btn-sm" style="color: #66c0f4;" (click)="editarUsuario(usuario)">Guardar</button>
+                    } @else {
+                    <button class="btn btn-sm" style="color: #66c0f4;" (click)="editarUsuario(usuario)">Editar</button>
+                    }
+                    <button class="btn btn-sm" style="color: #b30606;"
+                      (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+                  </div>
                 </div>
-                <div class="d-flex gap-2">
-                  @if (usuarioEditandoId == usuario.id) {
-                  <button class="btn btn-sm" style="color: #66c0f4; " (click)="editarUsuario(usuario.id)">Editar</button>
-                  } @else {
-                  <button class="btn btn-sm"style="color: #66c0f4;" (click)="editarUsuario(usuario)">Guardar</button>
-                  }
-                  <button class="btn btn-sm"
-                    style="color: #b30606;"(click)="eliminarUsuario(usuario.id)">Eliminar</button>
-                </div>
-              </div>
-              }
-
+              </li>
+            }
             </ul>
           </div>
 
@@ -92,5 +95,6 @@
       </div>
     </div>
   </div>
+  </article>
 </section>
 }

@@ -130,7 +130,6 @@ export class ProductsComponent implements OnInit {
   if (event.isFavorite && this.isLoggedIn) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const iduser = currentUser.id;
-    console.log(iduser);
 
     const favoritoData = {
       id_juego: event.id_juego,
@@ -139,16 +138,23 @@ export class ProductsComponent implements OnInit {
       likes: false
     };
 
-    this.favoritoService.addFavorito(favoritoData).subscribe({
-      next: () => console.log('Agregado a favoritos')
-    });
+   
+    this.favoritoService.getFavoritos().subscribe((data) => {
+      const favoritoExistente = data.member.find((f: any) =>
+        f.gameId === event.id_juego.toString() &&
+        f.users === `/api/usuarios/${iduser}`
+      );
 
-     this.favoritoService.deleteFavorito(iduser).subscribe({
-    next: () => console.log('Eliminado de favoritos')
-  });
-  } 
- 
+      
+        
+        this.favoritoService.addFavorito(favoritoData).subscribe({
+          next: () => console.log('Agregado a favoritos')
+        });
+      
+    });
+  }
 }
+
 
 
 
