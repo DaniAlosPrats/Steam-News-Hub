@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AdminService } from '../../services/admin.service';
 import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
@@ -16,7 +15,6 @@ export class RegistreComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private apiService = inject(UsuarioService);
-  private adminService = inject(AdminService);
   
 signUpForm: FormGroup = this.fb.group({
   nombre: ['', Validators.required],
@@ -29,7 +27,7 @@ signUpForm: FormGroup = this.fb.group({
 
     const formValue = this.signUpForm.value;
 
-    const usuarioPayload = {
+    const usuarioRegistre = {
       member: [
         {
           nombre: formValue.nombre,
@@ -39,7 +37,7 @@ signUpForm: FormGroup = this.fb.group({
       ]
     };
 
-    this.apiService.postUsuario(usuarioPayload).subscribe({
+    this.apiService.postUsuario(usuarioRegistre).subscribe({
       next: (response) => {
         console.log('Usuario registrado:', response);
         this.router.navigate(['/login']);
