@@ -31,7 +31,6 @@ public getAllFavoritos(): Observable<Favoritos[]> {
   
     const favoritoDataToSend = {
       gameId: favorito.id_juego.toString(), 
-      likes: favorito.likes || false,
       favoritos: favorito.favoritos || false,
       users: favorito.id_usuario
     };
@@ -54,7 +53,6 @@ updateFavorito(favoritoId: number, favorito: Partial<Member>): Observable<Member
   });
 
   const favoritoDataToSend = {
-    likes: favorito.likes,
     favoritos: favorito.favoritos
   };
 

@@ -135,7 +135,6 @@ export class ProductsComponent implements OnInit {
       id_juego: event.id_juego,
       id_usuario: `/api/usuarios/${iduser}`,
       favoritos: true,
-      likes: false
     };
 
    
