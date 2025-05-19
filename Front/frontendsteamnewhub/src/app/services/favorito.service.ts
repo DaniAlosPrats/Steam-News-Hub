@@ -13,13 +13,13 @@ export class FavoritoService {
   constructor(private http: HttpClient) { }
   public getFavoritos(): Observable<Favoritos> {
     return this.http.get<Favoritos>(
-      'http://localhost:8000/api/favoritos'
+      'http://127.0.0.1:8000/api/favoritos'
     );
   }
   
 public getAllFavoritos(): Observable<Favoritos[]> {
   return this.http.get<Favoritos[]>(
-    'http://localhost:8000/api/favoritos'
+    'http://127.0.0.1:8000/api/favoritos'
   );
 }
 
@@ -36,14 +36,14 @@ public getAllFavoritos(): Observable<Favoritos[]> {
     };
   
     return this.http.post<Favoritos>(
-      'http://localhost:8000/api/favoritos',
+      'http://127.0.0.1:8000/api/favoritos',
       favoritoDataToSend,
       { headers }
     );
   }
 
   deleteFavorito(id: number): Observable<any> {
-  return this.http.delete(`http://localhost:8000/api/favoritos/${id}`);
+  return this.http.delete(`http://127.0.0.1:8000/api/favoritos/${id}`);
 }
 
 

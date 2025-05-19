@@ -15,18 +15,18 @@ export class UsuarioService {
 
   public getUsuarios(): Observable<Usuario> {
     return this.http.get<Usuario>(
-      'http://localhost:8000/api/usuarios'
+      'http://127.0.0.1:8000/api/usuarios'
     );
   }
  getAllUsuarios(): Observable<Member[]> {
-  return this.http.get<Usuario>('http://localhost:8000/api/usuarios')
+  return this.http.get<Usuario>('http://127.0.0.1:8000/api/usuarios')
     .pipe(map((response: Usuario) => response.member));
 }
 
 
   public getUsuarioById(id: number ) {
     return this.http.get<any>(
-       `http://localhost:8000/api/usuarios/${id}`
+       `http://127.0.0.1:8000/api/usuarios/${id}`
     );
   }
 
@@ -45,7 +45,7 @@ export class UsuarioService {
     };
   
     return this.http.post<Usuario>(
-      'http://localhost:8000/api/usuarios', 
+      'http://127.0.0.1:8000/api/usuarios', 
       userDataToSend, 
       { headers }
     );
@@ -57,7 +57,7 @@ export class UsuarioService {
     });
   
     return this.http.delete<Usuario>(
-      `http://localhost:8000/api/usuarios/${id}`,
+      `http://127.0.0.1:8000/api/usuarios/${id}`,
       { headers }
     );
   }
@@ -76,7 +76,7 @@ export class UsuarioService {
     };
   
     return this.http.patch<Member>(
-      `http://localhost:8000/api/usuarios/${id}`,
+      `http://127.0.0.1:8000/api/usuarios/${id}`,
       userDataToSend,
       { headers }
     );
@@ -89,7 +89,7 @@ export class UsuarioService {
   });
 
   return this.http.patch<Usuario>(
-    `http://localhost:8000/api/usuarios/${id}`,
+    `http://127.0.0.1:8000/api/usuarios/${id}`,
     userDataToSend,
     { headers }
   );

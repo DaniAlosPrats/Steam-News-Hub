@@ -1,0 +1,5 @@
+para poder usar la aplicacion se divide en dos partes.
+
+Front: poner cd .\Front\frontendsteamnewhub\ para ir al proyecto de angular y en este ejecutar ng serve.
+
+Back: Abrir el docker y ejecutarlo, dentro del docker poner docker exec -it servidor_php /bin/bash poner poner la ruta de la carpeta, tener la bas ede datos en symfony y escribir symfony serve:start.

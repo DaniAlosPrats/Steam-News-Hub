@@ -116,15 +116,7 @@ export class ProductsComponent implements OnInit {
 });
   }
 
-  searchProducts(): void {
-  const term = this.searchTerm.trim().toLowerCase();
-
-  this.productosFiltrados = this.productos.filter(product =>
-    !term ||
-    product.titulo?.toLowerCase().includes(term) ||
-    product.contents?.toLowerCase().includes(term)
-  );
-}
+  
 
   addToFavorites(event: { isFavorite: boolean, id_juego: number }): void {
   if (event.isFavorite && this.isLoggedIn) {
