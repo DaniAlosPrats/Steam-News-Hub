@@ -1,22 +1,27 @@
-<div class="container">
-    <h1 style="color: #ffff;" >Log In</h1>
-    <form [formGroup]="signUpForm" (ngSubmit)="registrarUsuario()">
-      <div class="form-group">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" formControlName="nombre" class="form-control"/>
-      </div>
-  
-      <div class="form-group">
-        <label for="email" style="color: #ffff;">Email:</label>
-        <input type="email" id="email" formControlName="email" class="form-control"/>
-      </div>
-  
-      <div class="form-group">
-        <label for="password" style="color: #ffff;">Contraseña:</label>
-        <input type="password" id="password" formControlName="password" class="form-control"/>
-      </div>
-  
-      <button type="submit" class="btn-primary">Registrarse</button>
-    </form>
-    <p>¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
-  </div>
+<div class="container mt-5" style="max-width: 500px;">
+  <h1 class="text-white mb-4 text-center">Log In</h1>
+
+  <form [formGroup]="signUpForm" (ngSubmit)="registrarUsuario()">
+    <div class="mb-3">
+      <label for="nombre" class="form-label text-white">Nombre:</label>
+      <input type="text" id="nombre" formControlName="nombre" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label text-white">Email:</label>
+      <input type="email" id="email" formControlName="email" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label text-white">Contraseña:</label>
+      <input type="password" id="password" formControlName="password" class="form-control">
+    </div>
+
+    <button type="submit" style="background-color: #007bff; height: 40px;">Registrarse</button>
+  </form>
+
+  <p class="mt-3 text-white text-center">
+    ¿Ya tienes una cuenta?
+    <a routerLink="/login" routerLinkActive="active" style="color: #007bff;" >Inicia sesión</a>
+  </p>
+</div>

@@ -85,7 +85,7 @@ export class ProductsComponent implements OnInit {
   volver(): void {
     this.Buscado = false;
     this.appidInput = null;
-    this.productosFiltrados =  this.productos.slice();;
+    this.productosFiltrados =  this.productos.slice();
   }
 
   buscarJuego(): void {
@@ -105,7 +105,7 @@ export class ProductsComponent implements OnInit {
       this.productos = [];
     }
 
-    this.productosFiltrados =  this.productos.slice();;
+    this.productosFiltrados =  this.productos.slice();
     this.photo = 'https://cdn.cloudflare.steamstatic.com/steam/apps/' + this.appidInput + '/header.jpg';
   },
   error: () => {

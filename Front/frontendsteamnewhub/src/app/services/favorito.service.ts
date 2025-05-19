@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Favoritos } from '../models/favoritos.response.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Member } from '../models/favoritos.response.interface';
+
 
 
 @Injectable({
@@ -46,21 +46,6 @@ public getAllFavoritos(): Observable<Favoritos[]> {
   return this.http.delete(`http://localhost:8000/api/favoritos/${id}`);
 }
 
-updateFavorito(favoritoId: number, favorito: Partial<Member>): Observable<Member> {
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/merge-patch+json',
-    'Accept': 'application/ld+json'
-  });
 
-  const favoritoDataToSend = {
-    favoritos: favorito.favoritos
-  };
-
-  return this.http.patch<Member>(
-    `http://localhost:8000/api/favoritos/${favoritoId}`,
-    favoritoDataToSend,
-    { headers }
-  );
-}
 
 }
