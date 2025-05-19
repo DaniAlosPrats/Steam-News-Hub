@@ -18,7 +18,7 @@
         <section class="card-container">
           <div class="row g-3">
             @for (product of productosFiltrados; track product.title) {
-              <article class="col-md-3 mb-3">
+              <article class="col-12 col-md-6 col-lg-4">
                 <app-card-products 
                   [titulo]="product.title"
                   [descripcion]="product.contents"
@@ -36,7 +36,7 @@
 
           <div class="card-container">
             <div class="row g-3">
-              <article class="col-md-3 mb-3">
+              <article class="col-12 col-md-6 col-lg-4">
                 <app-card-products
                   [titulo]="titulo1"
                   [descripcion]="descripcion1"
@@ -44,14 +44,14 @@
                   
                 </app-card-products>
               </article>
-              <article class="col-md-3 mb-3">
+              <article class="col-12 col-md-6 col-lg-4">
                 <app-card-products
                   [titulo]="titulo2"
                   [descripcion]="descripcion2"
                   [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/420/header.jpg)'">
                 </app-card-products>
               </article>
-              <article class="col-md-3 mb-3">
+              <article class="col-12 col-md-6 col-lg-4">
                 <app-card-products
                   [titulo]="titulo3"
                   [descripcion]="descripcion3"
@@ -63,21 +63,21 @@
 
           <div class="card-container">
             <div class="row g-3">
-              <article class="col-md-3 mb-3">
+              <article class="col-12 col-md-6 col-lg-4">
                 <app-card-products
                   [titulo]="titulo4"
                   [descripcion]="descripcion4"
                   [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'">
                 </app-card-products>
               </article>
-              <article class="col-md-3 mb-3">
+              <article class="col-12 col-md-6 col-lg-4">
                 <app-card-products
                   [titulo]="titulo5"
                   [descripcion]="descripcion5"
                   [foto]="'url(https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg)'">
                 </app-card-products>
               </article>
-              <article class="col-md-3 mb-3">
+              <article class="col-12 col-md-6 col-lg-4">
                 <app-card-products
                   [titulo]="titulo6"
                   [descripcion]="descripcion6"
@@ -96,7 +96,7 @@
         <section class="card-container">
           <div class="row g-3">
             @for (product of productosFiltrados; track product.title) {
-              <article class="col-md-3 mb-3">
+              <article class="col-12 col-md-6 col-lg-4">
                 <app-cardfav 
                   [titulo]="product.title"
                   [descripcion]="product.contents"
@@ -117,7 +117,7 @@
 
           <div class="card-container">
             <div class="row g-3">
-              <article class="col-md-3 mb-3">
+              <article class="col-12 col-md-6 col-lg-4">
                 <app-cardfav
                   [titulo]="titulo1"
                   [descripcion]="descripcion1"
@@ -127,7 +127,7 @@
                  >
                 </app-cardfav>
               </article>
-              <article class="col-md-3 mb-3">
+              <article class="col-12 col-md-6 col-lg-4">
                 <app-cardfav
                   [titulo]="titulo2"
                   [descripcion]="descripcion2"
@@ -137,7 +137,7 @@
                 >
                 </app-cardfav>
               </article>
-              <article class="col-md-3 mb-3">
+              <article class="col-12 col-md-6 col-lg-4">
                 <app-cardfav
                   [titulo]="titulo3"
                   [descripcion]="descripcion3"
@@ -152,7 +152,7 @@
 
           <div class="card-container">
             <div class="row g-3">
-              <article class="col-md-3 mb-3">
+              <article class="col-12 col-md-6 col-lg-4">
                <app-cardfav
                  [titulo]="titulo1"
                 [descripcion]="descripcion1"
@@ -162,7 +162,7 @@
                  >
                   </app-cardfav>
               </article>
-              <article class="col-md-3 mb-3">
+              <article class="col-12 col-md-6 col-lg-4">
                 <app-cardfav
                   [titulo]="titulo5"
                   [descripcion]="descripcion5"
@@ -172,7 +172,7 @@
                  >
                 </app-cardfav>
               </article>
-              <article class="col-md-3 mb-3">
+              <article class="col-12 col-md-6 col-lg-4">
                 <app-cardfav
                   [titulo]="titulo6"
                   [descripcion]="descripcion6"
